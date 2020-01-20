@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorSearchFragment">#3B7861</color>
+    <color name="colorSummaryFragment">#256d7b</color>
+    <color name="colorExportFragment">#808080</color>
+    <color name="some_darker_blue_color">#4C2F27</color>
+    <color name="some_lighter_gray_color">#757575</color>
 </resources>
