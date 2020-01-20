@@ -6,11 +6,14 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.IdRes
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ma.businessinventory.R
+import com.ma.businessinventory.adapter.MainPagerAdapter
 
-class MainActivity : AppCompatActivity(), Main.View, BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), Main.View,
+    BottomNavigationView.OnNavigationItemSelectedListener {
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
@@ -29,10 +32,16 @@ class MainActivity : AppCompatActivity(), Main.View, BottomNavigationView.OnNavi
         // Initialize components/views.
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.navigationView);
-        mainPagerAdapter = MainPagerAdapter(supportFragmentManager)
+        mainPagerAdapter = MainPagerAdapter(supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
 
         // Set items to be displayed.
-        mainPagerAdapter.setItems(arrayListOf(MainScreen.LOGS, MainScreen.PROGRESS, MainScreen.PROFILE))
+        mainPagerAdapter.setItems(
+            arrayListOf(
+                MainScreen.LOGS,
+                MainScreen.PROGRESS,
+                MainScreen.PROFILE
+            )
+        )
 
         // Show the default screen.
         val defaultScreen = MainScreen.LOGS
