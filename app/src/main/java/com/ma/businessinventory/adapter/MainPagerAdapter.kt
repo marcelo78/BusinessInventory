@@ -5,7 +5,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.ma.businessinventory.ui.main.MainScreen
 
-class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class MainPagerAdapter(fm: FragmentManager, index: Int) :
+    FragmentStatePagerAdapter(fm, index) {
 
     private val screens = arrayListOf<MainScreen>()
 

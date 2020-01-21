@@ -6,11 +6,17 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.IdRes
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ma.businessinventory.R
+import com.ma.businessinventory.adapter.MainPagerAdapter
+import com.ma.businessinventory.db.ProductViewModel
+import androidx.lifecycle.Observer
 
-class MainActivity : AppCompatActivity(), Main.View, BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), Main.View,
+    BottomNavigationView.OnNavigationItemSelectedListener {
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
@@ -19,6 +25,8 @@ class MainActivity : AppCompatActivity(), Main.View, BottomNavigationView.OnNavi
     private lateinit var viewPager: ViewPager
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var mainPagerAdapter: MainPagerAdapter
+
+    private lateinit var productViewModel: ProductViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +37,19 @@ class MainActivity : AppCompatActivity(), Main.View, BottomNavigationView.OnNavi
         // Initialize components/views.
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.navigationView);
-        mainPagerAdapter = MainPagerAdapter(supportFragmentManager)
+        mainPagerAdapter = MainPagerAdapter(
+            supportFragmentManager,
+            FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+        )
 
         // Set items to be displayed.
-        mainPagerAdapter.setItems(arrayListOf(MainScreen.LOGS, MainScreen.PROGRESS, MainScreen.PROFILE))
+        mainPagerAdapter.setItems(
+            arrayListOf(
+                MainScreen.LOGS,
+                MainScreen.PROGRESS,
+                MainScreen.PROFILE
+            )
+        )
 
         // Show the default screen.
         val defaultScreen = MainScreen.LOGS
@@ -52,6 +69,21 @@ class MainActivity : AppCompatActivity(), Main.View, BottomNavigationView.OnNavi
                 selectBottomNavigationViewMenuItem(selectedScreen.menuItemId)
                 supportActionBar?.setTitle(selectedScreen.titleStringId)
             }
+        })
+
+        // Get a new or existing ViewModel from the ViewModelProvider.
+        productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
+
+        // Add an observer on the LiveData returned by getAlphabetizedWords.
+        // The onChanged() method fires when the observed data changes and the activity is
+        // in the foreground.
+        productViewModel.allWords.observe(this, Observer { products ->
+            // Update the cached copy of the words in the adapter.
+            Log.d(TAG, "")
+            products.let {
+                it
+            }
+//            words?.let { adapter.setWords(it) }
         })
     }
 
