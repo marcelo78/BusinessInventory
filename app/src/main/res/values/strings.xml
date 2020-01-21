@@ -2,8 +2,8 @@
     <string name="app_name">Business Inventory</string>
 
     <string name="btn_serch">Search</string>
-    <string name="btn_summary">View Summary Report</string>
-    <string name="btn_export">Export Events to Email</string>
+    <string name="btn_summary">Summary</string>
+    <string name="btn_export">Events</string>
 
     <string name="title_fragment_export">Export fragment</string>
     <string name="title_fragment_search">Search fragment</string>

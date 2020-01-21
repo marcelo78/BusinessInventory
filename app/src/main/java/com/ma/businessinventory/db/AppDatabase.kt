@@ -10,6 +10,7 @@ import com.ma.businessinventory.db.dao.ProductDao
 import com.ma.businessinventory.db.entity.ProductEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Database(entities = [ProductEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
@@ -30,7 +31,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "word_database"
+                    "businessinventory_database"
                 )
                     .addCallback(WordDatabaseCallback(scope))
                     .build()
@@ -51,10 +52,9 @@ abstract class AppDatabase : RoomDatabase() {
                 // If you want to keep the data through app restarts,
                 // comment out the following line.
                 INSTANCE?.let { database ->
-                    Log.d("********", "")
-//                    scope.launch(Dispatchers.IO) {
-//                        populateDatabase(database.productDao())
-//                    }
+                    scope.launch(Dispatchers.IO) {
+                        populateDatabase(database.productDao())
+                    }
                 }
             }
         }
@@ -67,11 +67,24 @@ abstract class AppDatabase : RoomDatabase() {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
             productDao.deleteAll()
+            Log.d("AppDatabase", "The products were deleted")
 
-//            var word = Word("Hello")
-//            wordDao.insert(word)
-//            word = Word("World!")
-//            wordDao.insert(word)
+            var product =
+                ProductEntity(
+                    0, "Hello1", "", "", "", "",
+                    "", 0.0, 0.0, 0, 0,
+                    0.0, 0, 0, ""
+                )
+            productDao.insert(product)
+            Log.d("AppDatabase", "The products were added")
+            product =
+                ProductEntity(
+                    1, "Hello2", "", "", "", "",
+                    "", 0.0, 0.0, 0, 0,
+                    0.0, 0, 0, ""
+                )
+            productDao.insert(product)
+            Log.d("AppDatabase", "The products were added")
         }
     }
 }
