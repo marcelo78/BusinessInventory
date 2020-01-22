@@ -16,15 +16,17 @@
     <item
         android:id="@+id/action_home"
         android:icon="@drawable/ic_action_home"
-        android:title="Home" />
+        android:title="Home"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_search_by_name"
         android:icon="@drawable/ic_filter_list_50dp"
         android:title="Search by Name"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_search_by_barcode"
         android:icon="@drawable/ic_action_home"
-        android:title="Search by Barcode" />
+        android:title="Search by Barcode"
+        app:showAsAction="always"/>
 
 </menu>
