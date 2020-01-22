@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Business Inventory</string>
 
     <string name="btn_serch">Search</string>
@@ -8,4 +8,11 @@
     <string name="title_fragment_export">Export fragment</string>
     <string name="title_fragment_search">Search fragment</string>
     <string name="title_fragment_summary">Summary fragment</string>
+
+    <string name="view_cost">Cost:</string>
+    <string name="view_rem">Rem:</string>
+    <string name="view_recv">Recv\'d:</string>
+
+    <string name="list_item_text_cost_item">US$ %s</string>
+    <string name="list_item_text_rem_item">%.2f of %.2f</string>
 </resources>
