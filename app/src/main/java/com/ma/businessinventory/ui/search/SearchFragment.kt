@@ -40,7 +40,7 @@ class SearchFragment : Fragment(), Search.View {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         listItems = view.findViewById(R.id.listItems)
         listItems.layoutManager = LinearLayoutManager(context)
-        presenter.getItems()
+        presenter.getItems(activity!!)
         return view
     }
 

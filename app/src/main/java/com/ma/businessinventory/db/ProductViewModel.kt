@@ -13,14 +13,14 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     private val repository: ProductRepository
 
     // LiveData gives us updated words when they change.
-    val allWords: LiveData<List<ProductEntity>>
+    val allProducts: LiveData<List<ProductEntity>>
 
     init {
         // Gets reference to WordDao from WordRoomDatabase to construct
         // the correct WordRepository.
-        val wordsDao = AppDatabase.getDatabase(application, viewModelScope).productDao()
-        repository = ProductRepository(wordsDao)
-        allWords = repository.allWords
+        val productDao = AppDatabase.getDatabase(application, viewModelScope).productDao()
+        repository = ProductRepository(productDao)
+        allProducts = repository.allProducts
     }
 
     /**

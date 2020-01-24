@@ -19,7 +19,7 @@ interface ProductDao {
     @Insert
     fun insertAll(vararg products: ProductEntity)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(product: ProductEntity)
 
     @Delete

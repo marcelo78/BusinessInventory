@@ -1,20 +1,20 @@
 package com.ma.businessinventory.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.ma.businessinventory.MyApplication
 import com.ma.businessinventory.R
 import com.ma.businessinventory.adapter.MainPagerAdapter
 import com.ma.businessinventory.db.ProductViewModel
-import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Main.View,
     BottomNavigationView.OnNavigationItemSelectedListener {
@@ -23,11 +23,7 @@ class MainActivity : AppCompatActivity(), Main.View,
         private val TAG = MainActivity::class.java.simpleName
     }
 
-    private lateinit var viewPager: ViewPager
-    private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var mainPagerAdapter: MainPagerAdapter
-
-    private lateinit var productViewModel: ProductViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +31,7 @@ class MainActivity : AppCompatActivity(), Main.View,
 
         setSupportActionBar(findViewById(R.id.my_toolbar))
 
-        // Initialize components/views.
-        viewPager = findViewById(R.id.view_pager);
-        bottomNavigationView = findViewById(R.id.navigationView);
+        // Initialize components
         mainPagerAdapter = MainPagerAdapter(
             supportFragmentManager,
             FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
@@ -73,19 +67,8 @@ class MainActivity : AppCompatActivity(), Main.View,
         })
 
         // Get a new or existing ViewModel from the ViewModelProvider.
-        productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
-
-        // Add an observer on the LiveData returned by getAlphabetizedWords.
-        // The onChanged() method fires when the observed data changes and the activity is
-        // in the foreground.
-        productViewModel.allWords.observe(this, Observer { products ->
-            // Update the cached copy of the words in the adapter.
-            Log.d(TAG, "")
-            products.let {
-                it
-            }
-//            words?.let { adapter.setWords(it) }
-        })
+        (this.application as MyApplication).productViewModel =
+            ViewModelProvider(this).get(ProductViewModel::class.java)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
