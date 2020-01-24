@@ -16,4 +16,22 @@
     <string name="list_item_text_cost_item">US$ %s</string>
     <string name="list_item_text_rem_item">%.2f of %.2f</string>
     <string name="title_activity_add_item">Add Item</string>
+
+    <string name="btn_back">Back</string>
+    <string name="view_title">Inventory Summary</string>
+    <string name="btn_delete">Delete</string>
+    <string name="text_view_name">Inventory Name</string>
+    <string name="text_view_place">Place</string>
+    <string name="text_view_description">Description</string>
+    <string name="text_view_type">Type</string>
+    <string name="text_view_date">Date</string>
+    <string name="text_view_barcode">Barcode</string>
+    <string name="text_view_bought_no">Bought No.</string>
+    <string name="text_view_sold">Sold No</string>
+    <string name="text_view_unid_buy_price">Unid Buy Price US$</string>
+    <string name="text_view_unid_sell_price">Unid Sell Price US$</string>
+    <string name="text_view_total_cost">Total Cost US$</string>
+    <string name="text_view_total_received">Total Received US$</string>
+    <string name="text_view_total_profit">Total Profit US$</string>
+    <string name="text_view_photo">Photo</string>
 </resources>
