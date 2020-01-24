@@ -14,6 +14,7 @@ import com.ma.businessinventory.MyApplication
 import com.ma.businessinventory.R
 import com.ma.businessinventory.adapter.MainPagerAdapter
 import com.ma.businessinventory.db.ProductViewModel
+import com.ma.businessinventory.ui.additem.AddItemActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Main.View,
@@ -133,5 +134,9 @@ class MainActivity : AppCompatActivity(), Main.View,
             return true
         }
         return false
+    }
+
+    override fun openAddItemActivity() {
+        startActivity(AddItemActivity.getStartIntent(this))
     }
 }

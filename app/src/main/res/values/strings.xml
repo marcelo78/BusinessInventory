@@ -15,4 +15,5 @@
 
     <string name="list_item_text_cost_item">US$ %s</string>
     <string name="list_item_text_rem_item">%.2f of %.2f</string>
+    <string name="title_activity_add_item">Add Item</string>
 </resources>
