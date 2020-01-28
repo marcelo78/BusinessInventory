@@ -34,4 +34,7 @@
     <string name="text_view_total_received">Total Received US$</string>
     <string name="text_view_total_profit">Total Profit US$</string>
     <string name="text_view_photo">Photo</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="btn_save_detail">Save</string>
 </resources>
