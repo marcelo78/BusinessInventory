@@ -7,7 +7,7 @@ import com.ma.businessinventory.db.entity.ProductEntity
 @Dao
 interface ProductDao {
 
-    @Query("SELECT * FROM product")
+    @Query("SELECT * FROM product ORDER BY 2 ASC")
     fun getAll(): LiveData<List<ProductEntity>>
 
     @Query("SELECT * FROM product WHERE id IN (:ids)")
