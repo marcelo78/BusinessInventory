@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:ems="10"
-                    android:hint="@string/text_view_description"
+                    android:hint="@string/text_view_type"
                     android:inputType="textPersonName"
                     app:layout_constraintEnd_toEndOf="@+id/etName"
                     app:layout_constraintStart_toStartOf="@+id/etName"
@@ -199,7 +199,7 @@
                     android:layout_marginTop="8dp"
                     android:ems="10"
                     android:hint="@string/text_view_bought_no"
-                    android:inputType="textPersonName"
+                    android:inputType="numberDecimal"
                     app:layout_constraintEnd_toEndOf="@+id/etName"
                     app:layout_constraintStart_toStartOf="@+id/etName"
                     app:layout_constraintTop_toBottomOf="@+id/etBarcode" />
@@ -222,7 +222,7 @@
                     android:layout_marginTop="8dp"
                     android:ems="10"
                     android:hint="@string/text_view_sold"
-                    android:inputType="textPersonName"
+                    android:inputType="numberDecimal"
                     app:layout_constraintEnd_toEndOf="@+id/etName"
                     app:layout_constraintStart_toStartOf="@+id/etName"
                     app:layout_constraintTop_toBottomOf="@+id/etBoughtNo" />
@@ -245,7 +245,7 @@
                     android:layout_marginTop="8dp"
                     android:ems="10"
                     android:hint="@string/text_view_unid_buy_price"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     app:layout_constraintEnd_toEndOf="@+id/etName"
                     app:layout_constraintStart_toStartOf="@+id/etName"
                     app:layout_constraintTop_toBottomOf="@+id/etSoldNo" />
@@ -268,7 +268,7 @@
                     android:layout_marginTop="8dp"
                     android:ems="10"
                     android:hint="@string/text_view_unid_sell_price"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     app:layout_constraintEnd_toEndOf="@+id/etName"
                     app:layout_constraintStart_toStartOf="@+id/etName"
                     app:layout_constraintTop_toBottomOf="@+id/etUnidBuyPrice" />
@@ -291,7 +291,7 @@
                     android:layout_marginTop="8dp"
                     android:ems="10"
                     android:hint="@string/text_view_total_cost"
-                    android:inputType="textPersonName"
+                    android:inputType="numberDecimal"
                     app:layout_constraintEnd_toEndOf="@+id/etName"
                     app:layout_constraintStart_toStartOf="@+id/etName"
                     app:layout_constraintTop_toBottomOf="@+id/etUnidSellPrice" />
@@ -314,7 +314,7 @@
                     android:layout_marginTop="8dp"
                     android:ems="10"
                     android:hint="@string/text_view_total_received"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     app:layout_constraintEnd_toEndOf="@+id/etName"
                     app:layout_constraintStart_toStartOf="@+id/etName"
                     app:layout_constraintTop_toBottomOf="@+id/etTotalCost" />
@@ -337,7 +337,7 @@
                     android:layout_marginTop="8dp"
                     android:ems="10"
                     android:hint="@string/text_view_total_profit"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     app:layout_constraintEnd_toEndOf="@+id/etName"
                     app:layout_constraintStart_toStartOf="@+id/etName"
                     app:layout_constraintTop_toBottomOf="@+id/etTotalReceived" />
@@ -359,7 +359,7 @@
                     android:layout_marginTop="8dp"
                     android:ems="10"
                     android:hint="@string/text_view_photo"
-                    android:inputType="textPersonName"
+                    android:inputType="text"
                     app:layout_constraintEnd_toEndOf="@+id/etPlace"
                     app:layout_constraintStart_toStartOf="@+id/etPlace"
                     app:layout_constraintTop_toBottomOf="@+id/etTotalProfit" />
