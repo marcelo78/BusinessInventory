@@ -100,17 +100,17 @@ class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
 
     private fun checkMode() {
         idItem = intent.getLongExtra(ItemId, -1)
-        Log.v(TAG, "onCreate ID: $idItem")
+        Log.d(TAG, "onCreate ID: $idItem")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        Log.v(TAG, "onCreateOptionsMenu")
+        Log.d(TAG, "onCreateOptionsMenu")
         menuInflater.inflate(R.menu.add_detail_menu, menu)
         return true
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        Log.v(TAG, "onPrepareOptionsMenu")
+        Log.d(TAG, "onPrepareOptionsMenu")
         menu?.getItem(0)?.isVisible = idItem != 0L
         return true
     }
@@ -118,13 +118,14 @@ class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_delete -> {
             // User chose the "Settings" item, show the app settings UI...
-            Log.v(TAG, " ${item.title}")
+            Log.d(TAG, " ${item.title}")
+            presenter.deleteItem(product, this)
             true
         }
         else -> {
             // If we got here, the user's action was not recognized.
             // Invoke the superclass to handle it.
-            Log.v(TAG, "any")
+            Log.d(TAG, "any")
             super.onOptionsItemSelected(item)
         }
     }
@@ -132,12 +133,13 @@ class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
     private fun String.isNotEmtyField(): Boolean = this.isNotEmpty()
 
     override fun showResult() {
-        Toast.makeText(this, "Inserded", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show()
         finish()
     }
 
     override fun showError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this, "Unsuccessful", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
     override fun populate(product: List<ProductEntity>) {

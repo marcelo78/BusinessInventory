@@ -1,7 +1,6 @@
 package com.ma.businessinventory.ui.adddetailitem
 
 import android.app.Activity
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.ma.businessinventory.MyApplication
@@ -16,6 +15,11 @@ class AddDetailItemModel(private var presenter: AddDetailItem.Presenter) : AddDe
 
     override fun updateItem(product: ProductEntity, activity: Activity) {
         (activity.application as MyApplication).productViewModel.update(product)
+        presenter.showResult()
+    }
+
+    override fun deleteItem(product: ProductEntity, activity: Activity) {
+        (activity.application as MyApplication).productViewModel.delete(product)
         presenter.showResult()
     }
 

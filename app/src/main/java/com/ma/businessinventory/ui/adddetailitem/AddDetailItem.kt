@@ -22,6 +22,8 @@ interface AddDetailItem {
 
         fun updateItem(product: ProductEntity, activity: Activity)
 
+        fun deleteItem(product: ProductEntity, activity: Activity)
+
         fun showResult()
 
         fun showError()
@@ -37,6 +39,8 @@ interface AddDetailItem {
         fun insertItem(product: ProductEntity, activity: Activity)
 
         fun updateItem(product: ProductEntity, activity: Activity)
+
+        fun deleteItem(product: ProductEntity, activity: Activity)
 
         fun getItem(idItem: Long, activity: Activity)
     }

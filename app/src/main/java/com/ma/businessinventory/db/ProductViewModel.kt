@@ -10,6 +10,10 @@ import kotlinx.coroutines.launch
 
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
 
+    companion object {
+        private val TAG = ProductViewModel::class.java.simpleName
+    }
+
     // The ViewModel maintains a reference to the repository to get data.
     private val repository: ProductRepository
 
@@ -36,8 +40,13 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun update(product: ProductEntity) = viewModelScope.launch {
-        var returnInt = repository.update(product)
-        Log.d("ProductViewModel", "---------------------:$returnInt:----------------------------")
+        val returnInt = repository.update(product)
+        Log.d(TAG, "update:------------:$returnInt:------------")
+    }
+
+    fun delete(product: ProductEntity) = viewModelScope.launch {
+        val returnInt = repository.delete(product)
+        Log.d(TAG, "delete:------------:$returnInt:------------")
     }
 
     fun getItem(ids: Long): LiveData<List<ProductEntity>> {

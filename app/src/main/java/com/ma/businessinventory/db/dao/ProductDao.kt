@@ -23,7 +23,7 @@ interface ProductDao {
     suspend fun insert(product: ProductEntity)
 
     @Delete
-    fun delete(product: ProductEntity): Int
+    suspend fun delete(product: ProductEntity): Int
 
     @Query("DELETE FROM product")
     suspend fun deleteAll()

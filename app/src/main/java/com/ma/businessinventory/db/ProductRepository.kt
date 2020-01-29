@@ -18,6 +18,10 @@ class ProductRepository(private val productDao: ProductDao) {
         return productDao.update(productEntity)
     }
 
+    suspend fun delete(productEntity: ProductEntity):Int {
+        return productDao.delete(productEntity)
+    }
+
     fun getItem(ids: Long): LiveData<List<ProductEntity>> {
         return productDao.loadAllByIds(ids)
     }

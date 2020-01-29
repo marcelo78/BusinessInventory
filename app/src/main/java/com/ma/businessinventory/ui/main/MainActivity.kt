@@ -82,26 +82,26 @@ class MainActivity : AppCompatActivity(), Main.View,
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_home -> {
             // User chose the "Settings" item, show the app settings UI...
-            Log.v(TAG, " ${item.title}")
+            Log.d(TAG, " ${item.title}")
             true
         }
 
         R.id.action_search_by_name -> {
             // User chose the "Favorite" action, mark the current item
             // as a favorite...
-            Log.v(TAG, " ${item.title}")
+            Log.d(TAG, " ${item.title}")
             true
         }
         R.id.action_search_by_barcode -> {
             // User chose the "Favorite" action, mark the current item
             // as a favorite...
-            Log.v(TAG, " ${item.title}")
+            Log.d(TAG, " ${item.title}")
             true
         }
         else -> {
             // If we got here, the user's action was not recognized.
             // Invoke the superclass to handle it.
-            Log.v(TAG, "any")
+            Log.d(TAG, "any")
             super.onOptionsItemSelected(item)
         }
     }
@@ -142,6 +142,5 @@ class MainActivity : AppCompatActivity(), Main.View,
             putExtra(ItemId, idItem.toLong())
         }
         startActivity(intentDetail)
-//        startActivity(ItemListActivity.getStartIntent(this))
     }
 }

@@ -16,6 +16,10 @@ class AddDetailItemPresenter(private var view: AddDetailItem.View) : AddDetailIt
         model.updateItem(product, activity)
     }
 
+    override fun deleteItem(product: ProductEntity, activity: Activity) {
+        model.deleteItem(product, activity)
+    }
+
     override fun showResult() {
         view.showResult()
     }
