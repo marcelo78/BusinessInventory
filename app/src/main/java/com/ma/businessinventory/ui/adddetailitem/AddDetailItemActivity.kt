@@ -15,12 +15,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ma.businessinventory.R
 import com.ma.businessinventory.db.entity.ProductEntity
 import kotlinx.android.synthetic.main.activity_add_detail_item.*
-import java.util.*
 
 
 class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
 
-    private var idItem: Int = -1
+    private var idItem: Long = -1
 
     private lateinit var presenter: AddDetailItem.Presenter
     private lateinit var product: ProductEntity
@@ -31,6 +30,8 @@ class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
         fun getStartIntent(context: Context): Intent {
             return Intent(context, AddDetailItemActivity::class.java)
         }
+
+        const val ItemId = "PRODUCT_ID"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,34 +41,58 @@ class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
 
         presenter = AddDetailItemPresenter(this)
 
-//        btnSave.isEnabled = false
-
-        val date = Date()
-
-        val current = date.time
-        product = ProductEntity(
-            null, "", "", "", "", current.toString(),
-            "", 10.0, 10.0, 5, 10,
-            15.0, 10, 10, ""
-        )
-
-        idItem = intent.getIntExtra("idItem", -1)
-        Log.v(TAG, "onCreate $idItem")
+        product = ProductEntity(null)
+        checkMode()
 
         btnSave.setOnClickListener {
 
             Log.v(TAG, "btnSave")
-            product.nameInventory = etName.text.toString()
-            presenter.insertItem(product, this)
+            product.apply {
+                nameInventory = etName.text.toString()
+//                place = etPlace.text.toString()
+//                description = etDescription.text.toString()
+//                type = etType.text.toString()
+//                dateProduct = etDate.text.toString()
+//                barcode = etBarcode.text.toString()
+//                boughtNo = etBoughtNo.text.toString().toDouble()
+//                soldNo = etSoldNo.text.toString().toDouble()
+//                unidBuyPriceUS = etUnidBuyPrice.text.toString().toInt()
+//                unidSellPriceUS = etUnidSellPrice.text.toString().toInt()
+//                totalCostUS = etTotalCost.text.toString().toDouble()
+//                totalReceivedUS = etTotalReceived.text.toString().toInt()
+//                totalProfitUS = etTotalProfit.text.toString().toInt()
+//                photo = etPhoto.text.toString()
+            }
+
+            val valid = presenter.validate(product)
+            if (valid) {
+                if (idItem == -1L) {
+                    presenter.insertItem(product, this)
+                } else {
+                    presenter.updateItem(product, this)
+                }
+            }
 
         }
 
-        init()
+//        init()
     }
 
-    private fun init() {
-        etName.validate("Name required") { s -> s.isNotEmtyField() }
+    override fun onStart() {
+        super.onStart()
+        if(idItem != -1L){
+            presenter.getItem(idItem, this)
+        }
+    }
+
+//    private fun init() {
 //        etName.validate("Name required") { s -> s.isNotEmtyField() }
+////        etName.validate("Name required") { s -> s.isNotEmtyField() }
+//    }
+
+    private fun checkMode() {
+        idItem = intent.getIntExtra(ItemId, -1).toLong()
+        Log.v(TAG, "onCreate $idItem")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -78,7 +103,7 @@ class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         Log.v(TAG, "onPrepareOptionsMenu")
-        menu?.getItem(0)?.isVisible = idItem != -1
+        menu?.getItem(0)?.isVisible = idItem != -1L
         return true
     }
 
@@ -119,8 +144,8 @@ class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
         }
     }
 
-    private fun String.isValidEmail(): Boolean =
-        this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+//    private fun String.isValidEmail(): Boolean =
+//        this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
     private fun String.isNotEmtyField(): Boolean =
         this.isNotEmpty()
@@ -132,6 +157,52 @@ class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
 
     override fun showError() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun populate(product: List<ProductEntity>) {
+        if (product.isNotEmpty()) {
+            product[0].apply {
+                Log.d(TAG, "Name: $nameInventory")
+                etName.setText(nameInventory)
+                etPlace.setText(place)
+                etDescription.setText(description)
+                etType.setText(type)
+                etDate.setText(dateProduct)
+                etBarcode.setText(barcode)
+                etBoughtNo.setText("$boughtNo")
+                etSoldNo.setText("$soldNo")
+                etUnidBuyPrice.setText("$unidBuyPriceUS")
+                etUnidSellPrice.setText("$unidSellPriceUS")
+                etTotalCost.setText("$totalCostUS")
+                etTotalReceived.setText("$totalReceivedUS")
+                etTotalProfit.setText("$totalProfitUS")
+                etPhoto.setText(photo)
+            }
+        }
+    }
+
+    override fun clearPreErrors() {
+        etName.apply {
+            error = null
+            clearFocus()
+        }
+//        etPlace.error = ""
+//        etDescription.error = ""
+//        etType.error = ""
+//        etDate.error = ""
+//        etBarcode.error = ""
+//        etBoughtNo.error = ""
+//        etSoldNo.error = ""
+//        etUnidBuyPrice.error = ""
+//        etUnidSellPrice.error = ""
+//        etTotalCost.error = ""
+//        etTotalReceived.error = ""
+//        etTotalProfit.error = ""
+//        etPhoto.error = ""
+    }
+
+    override fun showErrorMessage() {
+        etName.error = "Invalid Name"
     }
 
 }
