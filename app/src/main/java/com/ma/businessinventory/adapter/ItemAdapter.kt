@@ -19,8 +19,8 @@ class ItemAdapter(private val items: List<ProductEntity>, val context: Context) 
 
     init {
         onClickListener = View.OnClickListener { view ->
-            Log.d(TAG, "${view.tag}")
-            val idItem: Int = view.tag as Int
+            Log.d(TAG, "Id: ${view.tag}")
+            val idItem: Int = view.tag.toString().toInt()
             (context as MainActivity).openAddItemActivity(idItem)
         }
     }
@@ -38,6 +38,7 @@ class ItemAdapter(private val items: List<ProductEntity>, val context: Context) 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.d(TAG, "ID: ${items[position].id}")
         holder.tvName.text = items[position].nameInventory
         holder.tvPlace.text = items[position].place
         holder.tvDate.text = items[position].dateProduct
@@ -61,7 +62,7 @@ class ItemAdapter(private val items: List<ProductEntity>, val context: Context) 
         val color = if (total < 0) Color.RED else Color.GREEN
         holder.tvRecv.setTextColor(color)
         with(holder.cardView) {
-            tag = position
+            tag = items[position].id
             setOnClickListener(onClickListener)
         }
     }

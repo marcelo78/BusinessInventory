@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity(), Main.View,
 
     override fun openAddItemActivity(idItem: Int) {
         val intentDetail = AddDetailItemActivity.getStartIntent(this).apply {
-            putExtra(ItemId, idItem)
+            putExtra(ItemId, idItem.toLong())
         }
         startActivity(intentDetail)
 //        startActivity(ItemListActivity.getStartIntent(this))

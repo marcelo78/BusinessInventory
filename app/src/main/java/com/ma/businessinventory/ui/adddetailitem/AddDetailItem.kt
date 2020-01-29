@@ -14,7 +14,7 @@ interface AddDetailItem {
 
         fun clearPreErrors()
 
-        fun showErrorMessage()
+        fun showErrorMessage(idView: Int, message: String)
     }
 
     interface Presenter {

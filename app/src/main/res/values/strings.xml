@@ -37,4 +37,6 @@
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="btn_save_detail">Save</string>
+
+    <string name="error_message">Empty Field</string>
 </resources>

@@ -52,7 +52,7 @@ class SearchFragment : Fragment(), Search.View {
         listItems.layoutManager = LinearLayoutManager(context)
         presenter.getItems(activity!!)
         fabAddItem.setOnClickListener {
-            (activity as MainActivity).openAddItemActivity(-1)
+            (activity as MainActivity).openAddItemActivity(0)
         }
     }
 

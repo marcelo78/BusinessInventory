@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "db1753b9d3a9092cb9acd0b885ba39c1",
+    "identityHash": "48e8ea18e728f0f792a49be0b50f3212",
     "entities": [
       {
         "tableName": "product",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name_inventory` TEXT, `place` TEXT, `description` TEXT, `type` TEXT, `date_product` TEXT, `barcode` TEXT, `bought_no` REAL DEFAULT 0.0, `sold_no` REAL DEFAULT 0.0, `unid_buy_price_us` INTEGER DEFAULT 0, `unid_sell_price_us` INTEGER DEFAULT 0, `total_cost_us` REAL DEFAULT 0, `total_received_us` INTEGER DEFAULT 0, `total_profit_us` INTEGER DEFAULT 0.0, `photo` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name_inventory` TEXT, `place` TEXT, `description` TEXT, `type` TEXT, `date_product` TEXT, `barcode` TEXT, `bought_no` REAL, `sold_no` REAL, `unid_buy_price_us` INTEGER, `unid_sell_price_us` INTEGER, `total_cost_us` REAL, `total_received_us` INTEGER, `total_profit_us` INTEGER, `photo` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -54,50 +54,43 @@
             "fieldPath": "boughtNo",
             "columnName": "bought_no",
             "affinity": "REAL",
-            "notNull": false,
-            "defaultValue": "0.0"
+            "notNull": false
           },
           {
             "fieldPath": "soldNo",
             "columnName": "sold_no",
             "affinity": "REAL",
-            "notNull": false,
-            "defaultValue": "0.0"
+            "notNull": false
           },
           {
             "fieldPath": "unidBuyPriceUS",
             "columnName": "unid_buy_price_us",
             "affinity": "INTEGER",
-            "notNull": false,
-            "defaultValue": "0"
+            "notNull": false
           },
           {
             "fieldPath": "unidSellPriceUS",
             "columnName": "unid_sell_price_us",
             "affinity": "INTEGER",
-            "notNull": false,
-            "defaultValue": "0"
+            "notNull": false
           },
           {
             "fieldPath": "totalCostUS",
             "columnName": "total_cost_us",
             "affinity": "REAL",
-            "notNull": false,
-            "defaultValue": "0"
+            "notNull": false
           },
           {
             "fieldPath": "totalReceivedUS",
             "columnName": "total_received_us",
             "affinity": "INTEGER",
-            "notNull": false,
-            "defaultValue": "0"
+            "notNull": false
           },
           {
             "fieldPath": "totalProfitUS",
             "columnName": "total_profit_us",
             "affinity": "INTEGER",
-            "notNull": false,
-            "defaultValue": "0.0"
+            "notNull": false
           },
           {
             "fieldPath": "photo",
@@ -119,7 +112,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'db1753b9d3a9092cb9acd0b885ba39c1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '48e8ea18e728f0f792a49be0b50f3212')"
     ]
   }
 }
