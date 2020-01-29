@@ -9,8 +9,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.ma.businessinventory.db.dao.ProductDao
 import com.ma.businessinventory.db.entity.ProductEntity
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @Database(entities = [ProductEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
@@ -51,11 +49,11 @@ abstract class AppDatabase : RoomDatabase() {
                 super.onOpen(db)
                 // If you want to keep the data through app restarts,
                 // comment out the following line.
-                INSTANCE?.let { database ->
-                    scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.productDao())
-                    }
-                }
+//                INSTANCE?.let { database ->
+//                    scope.launch(Dispatchers.IO) {
+//                        populateDatabase(database.productDao())
+//                    }
+//                }
             }
         }
 

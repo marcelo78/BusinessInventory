@@ -3,7 +3,7 @@ package com.ma.businessinventory.ui.main
 interface Main {
 
     interface View {
-        fun openAddItemActivity()
+        fun openAddItemActivity(idItem: Int)
     }
 
     interface Presenter {}

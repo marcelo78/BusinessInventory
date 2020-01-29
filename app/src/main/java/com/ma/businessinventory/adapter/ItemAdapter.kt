@@ -9,10 +9,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ma.businessinventory.R
 import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.ui.main.MainActivity
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class ItemAdapter(private val items: List<ProductEntity>, val context: Context) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+
+    private val onClickListener: View.OnClickListener
+
+    init {
+        onClickListener = View.OnClickListener { view ->
+            Log.d(TAG, "${view.tag}")
+            val idItem: Int = view.tag as Int
+            (context as MainActivity).openAddItemActivity(idItem)
+        }
+    }
 
     companion object {
         private val TAG = ItemAdapter::class.java.simpleName
@@ -27,11 +38,9 @@ class ItemAdapter(private val items: List<ProductEntity>, val context: Context) 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d(TAG, "$position position")
-        holder.tvId.text = "${items[position].id}"
         holder.tvName.text = items[position].nameInventory
         holder.tvPlace.text = items[position].place
-        holder.tvDate.text = items[position].date
+        holder.tvDate.text = items[position].dateProduct
         var text = context.getString(
             R.string.list_item_text_cost_item,
             items[position].totalCostUS.toString()
@@ -51,16 +60,20 @@ class ItemAdapter(private val items: List<ProductEntity>, val context: Context) 
         holder.tvRecv.text = context.getString(R.string.list_item_text_cost_item, total.toString())
         val color = if (total < 0) Color.RED else Color.GREEN
         holder.tvRecv.setTextColor(color)
+        with(holder.cardView) {
+            tag = position
+            setOnClickListener(onClickListener)
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvId = view.lblId
         val tvName = view.lblName
         val tvPlace = view.lblPlace
         val tvDate = view.lblDate
         val tvCost = view.lblCost
         val tvRem = view.lblRem
         val tvRecv = view.lblRecv
+        val cardView = view.cardView
     }
 
 }

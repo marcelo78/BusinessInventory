@@ -1,6 +1,7 @@
 package com.ma.businessinventory.db
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -32,5 +33,14 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
      */
     fun insert(product: ProductEntity) = viewModelScope.launch {
         repository.insert(product)
+    }
+
+    fun update(product: ProductEntity) = viewModelScope.launch {
+        var returnInt = repository.update(product)
+        Log.d("ProductViewModel", "---------------------:$returnInt:----------------------------")
+    }
+
+    fun getItem(ids: Long): LiveData<List<ProductEntity>> {
+        return repository.getItem(ids)
     }
 }

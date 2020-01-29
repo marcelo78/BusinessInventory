@@ -18,8 +18,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.additem.AddItemActivity"
-            android:label="@string/title_activity_add_item"></activity>
+            android:name=".ui.adddetailitem.AddDetailItemActivity"
+            android:label="@string/title_activity_add_item" />
+        <activity
+            android:name=".ui.ItemListActivity"
+            android:label="@string/title_item_list"
+            android:theme="@style/NoActionBar"></activity>
+        <activity
+            android:name=".ui.ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".ui.ItemListActivity"
+            android:theme="@style/NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ma.businessinventory.ui.ItemListActivity" />
+        </activity>
     </application>
 
 </manifest>

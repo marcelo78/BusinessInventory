@@ -14,7 +14,7 @@ import com.ma.businessinventory.MyApplication
 import com.ma.businessinventory.R
 import com.ma.businessinventory.adapter.MainPagerAdapter
 import com.ma.businessinventory.db.ProductViewModel
-import com.ma.businessinventory.ui.additem.AddItemActivity
+import com.ma.businessinventory.ui.adddetailitem.AddDetailItemActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Main.View,
@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity(), Main.View,
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
+
+        const val ItemId = "PRODUCT_ID"
     }
 
     private lateinit var mainPagerAdapter: MainPagerAdapter
@@ -96,7 +98,6 @@ class MainActivity : AppCompatActivity(), Main.View,
             Log.v(TAG, " ${item.title}")
             true
         }
-
         else -> {
             // If we got here, the user's action was not recognized.
             // Invoke the superclass to handle it.
@@ -136,7 +137,11 @@ class MainActivity : AppCompatActivity(), Main.View,
         return false
     }
 
-    override fun openAddItemActivity() {
-        startActivity(AddItemActivity.getStartIntent(this))
+    override fun openAddItemActivity(idItem: Int) {
+        val intentDetail = AddDetailItemActivity.getStartIntent(this).apply {
+            putExtra(ItemId, idItem)
+        }
+        startActivity(intentDetail)
+//        startActivity(ItemListActivity.getStartIntent(this))
     }
 }

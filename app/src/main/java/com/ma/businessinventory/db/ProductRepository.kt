@@ -10,7 +10,15 @@ class ProductRepository(private val productDao: ProductDao) {
     // Observed LiveData will notify the observer when the data has changed.
     val allProducts: LiveData<List<ProductEntity>> = productDao.getAll()
 
-    suspend fun insert(word: ProductEntity) {
-        productDao.insert(word)
+    suspend fun insert(productEntity: ProductEntity) {
+        productDao.insert(productEntity)
+    }
+
+    suspend fun update(productEntity: ProductEntity):Int {
+        return productDao.update(productEntity)
+    }
+
+    fun getItem(ids: Long): LiveData<List<ProductEntity>> {
+        return productDao.loadAllByIds(ids)
     }
 }
