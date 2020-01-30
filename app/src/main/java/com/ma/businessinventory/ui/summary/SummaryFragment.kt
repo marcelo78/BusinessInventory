@@ -1,6 +1,5 @@
 package com.ma.businessinventory.ui.summary
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.ma.businessinventory.R
-import com.ma.businessinventory.ui.ItemListActivity
 
 /**
  *
@@ -31,14 +29,14 @@ class SummaryFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_summary, container, false)
 
-        btnAdd = view.findViewById(R.id.btnAdd)
+//        btnAdd = view.findViewById(R.id.btnAdd)
 
-        btnAdd.setOnClickListener {
+//        btnAdd.setOnClickListener {
 
-            val intent = Intent(activity, ItemListActivity::class.java)
-            activity?.startActivity(intent)
+            //            val intent = Intent(activity, ItemListActivity::class.java)
+//            activity?.startActivity(intent)
 
-        }
+//        }
 
         return view
     }

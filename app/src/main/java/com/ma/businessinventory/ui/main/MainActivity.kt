@@ -81,12 +81,6 @@ class MainActivity : AppCompatActivity(), Main.View,
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_home -> {
-            // User chose the "Settings" item, show the app settings UI...
-            Log.d(TAG, " ${item.title}")
-            true
-        }
-
         R.id.action_search_by_name -> {
             // User chose the "Favorite" action, mark the current item
             // as a favorite...
