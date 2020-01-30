@@ -3,11 +3,7 @@ package com.ma.businessinventory.ui.adddetailitem
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -101,33 +97,6 @@ class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
     private fun checkMode() {
         idItem = intent.getLongExtra(ItemId, -1)
         Log.d(TAG, "onCreate ID: $idItem")
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        Log.d(TAG, "onCreateOptionsMenu")
-        menuInflater.inflate(R.menu.add_detail_menu, menu)
-        return true
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        Log.d(TAG, "onPrepareOptionsMenu")
-        menu?.getItem(0)?.isVisible = idItem != 0L
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_delete -> {
-            // User chose the "Settings" item, show the app settings UI...
-            Log.d(TAG, " ${item.title}")
-            presenter.deleteItem(product, this)
-            true
-        }
-        else -> {
-            // If we got here, the user's action was not recognized.
-            // Invoke the superclass to handle it.
-            Log.d(TAG, "any")
-            super.onOptionsItemSelected(item)
-        }
     }
 
     private fun String.isNotEmtyField(): Boolean = this.isNotEmpty()

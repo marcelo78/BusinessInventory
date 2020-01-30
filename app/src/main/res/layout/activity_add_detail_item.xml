@@ -45,7 +45,7 @@
                     app:layout_constraintGuide_percent="0.40" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tvTypeLabel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/text_view_name"
@@ -73,8 +73,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_place"
                     app:layout_constraintBottom_toBottomOf="@+id/etPlace"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etPlace" />
 
                 <EditText
@@ -96,8 +96,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_description"
                     app:layout_constraintBottom_toBottomOf="@+id/etDescription"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etDescription" />
 
                 <EditText
@@ -119,8 +119,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_type"
                     app:layout_constraintBottom_toBottomOf="@+id/etType"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etType" />
 
                 <EditText
@@ -142,8 +142,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_date"
                     app:layout_constraintBottom_toBottomOf="@+id/etDate"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etDate" />
 
                 <EditText
@@ -165,8 +165,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_barcode"
                     app:layout_constraintBottom_toBottomOf="@+id/etBarcode"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etBarcode" />
 
                 <EditText
@@ -188,8 +188,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_bought_no"
                     app:layout_constraintBottom_toBottomOf="@+id/etBoughtNo"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etBoughtNo" />
 
                 <EditText
@@ -211,8 +211,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_sold"
                     app:layout_constraintBottom_toBottomOf="@+id/etSoldNo"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etSoldNo" />
 
                 <EditText
@@ -234,8 +234,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_unid_buy_price"
                     app:layout_constraintBottom_toBottomOf="@+id/etUnidBuyPrice"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etUnidBuyPrice" />
 
                 <EditText
@@ -257,8 +257,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_unid_sell_price"
                     app:layout_constraintBottom_toBottomOf="@+id/etUnidSellPrice"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etUnidSellPrice" />
 
                 <EditText
@@ -280,8 +280,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_total_cost"
                     app:layout_constraintBottom_toBottomOf="@+id/etTotalCost"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etTotalCost" />
 
                 <EditText
@@ -303,8 +303,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_total_received"
                     app:layout_constraintBottom_toBottomOf="@+id/etTotalReceived"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etTotalReceived" />
 
                 <EditText
@@ -326,8 +326,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_total_profit"
                     app:layout_constraintBottom_toBottomOf="@+id/etTotalProfit"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etTotalProfit" />
 
                 <EditText
@@ -348,8 +348,8 @@
                     android:numColumns="0"
                     android:text="@string/text_view_photo"
                     app:layout_constraintBottom_toBottomOf="@+id/etPhoto"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="@+id/tvTypeLabel"
+                    app:layout_constraintStart_toStartOf="@+id/tvTypeLabel"
                     app:layout_constraintTop_toTopOf="@+id/etPhoto" />
 
                 <EditText
@@ -387,43 +387,5 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btnBackP"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_back"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="@string/view_title"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_delete" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
 
 </LinearLayout>

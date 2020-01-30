@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.ma.businessinventory.R
+import com.ma.businessinventory.ui.detailitem.ItemDetailActivity
+import com.ma.businessinventory.ui.detailitem.ItemDetailFragment
 import com.ma.businessinventory.ui.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list.*
@@ -74,28 +76,25 @@ class ItemListActivity : AppCompatActivity() {
     ) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
-        private val onClickListener: View.OnClickListener
-
-        init {
-            onClickListener = View.OnClickListener { v ->
-                val item = v.tag as DummyContent.DummyItem
-                if (twoPane) {
-                    val fragment = ItemDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putString(ItemDetailFragment.ARG_ITEM_ID, item.id)
-                        }
-                    }
-                    parentActivity.supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.item_detail_container, fragment)
-                        .commit()
-                } else {
-                    val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
-                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
-                    }
-                    v.context.startActivity(intent)
-                }
-            }
+        private val onClickListener: View.OnClickListener = View.OnClickListener { v ->
+//                val item = v.tag as DummyContent.DummyItem
+//                if (twoPane) {
+//                    val fragment = ItemDetailFragment()
+//                        .apply {
+//                        arguments = Bundle().apply {
+//                            putString(ItemDetailFragment.ARG_ITEM_ID, item.id)
+//                        }
+//                    }
+//                    parentActivity.supportFragmentManager
+//                        .beginTransaction()
+//                        .replace(R.id.item_detail_container, fragment)
+//                        .commit()
+//                } else {
+//                    val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
+//                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
+//                    }
+//                    v.context.startActivity(intent)
+//                }
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

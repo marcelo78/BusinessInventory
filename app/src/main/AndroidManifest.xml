@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ma.businessinventory">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -25,7 +27,7 @@
             android:label="@string/title_item_list"
             android:theme="@style/NoActionBar"></activity>
         <activity
-            android:name=".ui.ItemDetailActivity"
+            android:name=".ui.detailitem.ItemDetailActivity"
             android:label="@string/title_item_detail"
             android:parentActivityName=".ui.ItemListActivity"
             android:theme="@style/NoActionBar">

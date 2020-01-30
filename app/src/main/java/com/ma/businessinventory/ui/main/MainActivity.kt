@@ -15,6 +15,7 @@ import com.ma.businessinventory.R
 import com.ma.businessinventory.adapter.MainPagerAdapter
 import com.ma.businessinventory.db.ProductViewModel
 import com.ma.businessinventory.ui.adddetailitem.AddDetailItemActivity
+import com.ma.businessinventory.ui.detailitem.ItemDetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Main.View,
@@ -138,6 +139,13 @@ class MainActivity : AppCompatActivity(), Main.View,
     }
 
     override fun openAddItemActivity(idItem: Int) {
+        val intentDetail = ItemDetailActivity.getStartIntent(this).apply {
+            putExtra(ItemId, idItem.toLong())
+        }
+        startActivity(intentDetail)
+    }
+
+    override fun openEditItemActivity(idItem: Int) {
         val intentDetail = AddDetailItemActivity.getStartIntent(this).apply {
             putExtra(ItemId, idItem.toLong())
         }
