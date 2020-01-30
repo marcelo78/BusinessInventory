@@ -9,10 +9,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.ma.businessinventory.db.dao.ProductDao
 import com.ma.businessinventory.db.entity.ProductEntity
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-@Database(entities = [ProductEntity::class], version = 1, exportSchema = false)
+@Database(entities = [ProductEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun productDao(): ProductDao
@@ -51,11 +49,11 @@ abstract class AppDatabase : RoomDatabase() {
                 super.onOpen(db)
                 // If you want to keep the data through app restarts,
                 // comment out the following line.
-                INSTANCE?.let { database ->
-                    scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.productDao())
-                    }
-                }
+//                INSTANCE?.let { database ->
+//                    scope.launch(Dispatchers.IO) {
+//                        populateDatabase(database.productDao())
+//                    }
+//                }
             }
         }
 
@@ -71,17 +69,17 @@ abstract class AppDatabase : RoomDatabase() {
 
             var product =
                 ProductEntity(
-                    0, "Hello1", "", "", "", "",
-                    "", 0.0, 0.0, 0, 0,
-                    0.0, 0, 0, ""
+                    null, "Hello1", "Place1", "Description1", "Type1", "2020-01-22",
+                    "", 10.0, 10.0, 5, 10,
+                    15.0, 10, 10, ""
                 )
             productDao.insert(product)
             Log.d("AppDatabase", "The products were added")
             product =
                 ProductEntity(
-                    1, "Hello2", "", "", "", "",
-                    "", 0.0, 0.0, 0, 0,
-                    0.0, 0, 0, ""
+                    null, "Hello2", "Place2", "Description2", "Type2", "2020-01-20",
+                    "", 15.0, 11.0, 8, 4,
+                    20.0, 11, 12, ""
                 )
             productDao.insert(product)
             Log.d("AppDatabase", "The products were added")

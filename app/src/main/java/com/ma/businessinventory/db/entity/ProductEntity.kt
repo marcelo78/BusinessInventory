@@ -6,19 +6,19 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "product")
 data class ProductEntity(
-    @PrimaryKey val id: Int,
-    @ColumnInfo(name = "name_inventory") val nameInventory: String?,
-    @ColumnInfo(name = "place") val place: String,
-    @ColumnInfo(name = "description") val description: String?,
-    @ColumnInfo(name = "type") val type: String?,
-    @ColumnInfo(name = "date") val date: String?,
-    @ColumnInfo(name = "barcode") val barcode: String?,
-    @ColumnInfo(name = "bought_no") val boughtNo: Double?,
-    @ColumnInfo(name = "sold_no") val soldNo: Double?,
-    @ColumnInfo(name = "unid_buy_price_us") val unidBuyPriceUS: Int?,
-    @ColumnInfo(name = "unid_sell_price_us") val unidSellPriceUS: Int?,
-    @ColumnInfo(name = "total_cost_us") val totalCostUS: Double?,
-    @ColumnInfo(name = "total_received_us") val totalReceivedUS: Int?,
-    @ColumnInfo(name = "total_profit_us") val totalProfitUS: Int?,
-    @ColumnInfo(name = "photo") val photo: String?
+    @PrimaryKey(autoGenerate = true) var id: Long? = null,
+    @ColumnInfo(name = "name_inventory") var nameInventory: String? = null,
+    @ColumnInfo(name = "place") var place: String? = "",
+    @ColumnInfo(name = "description") var description: String? = "",
+    @ColumnInfo(name = "type") var type: String? = "",
+    @ColumnInfo(name = "date_product") var dateProduct: String? = "",
+    @ColumnInfo(name = "barcode") var barcode: String? = "",
+    @ColumnInfo(name = "bought_no") var boughtNo: Double? = 0.0,
+    @ColumnInfo(name = "sold_no") var soldNo: Double? = 0.0,
+    @ColumnInfo(name = "unid_buy_price_us") var unidBuyPriceUS: Int? = 0,
+    @ColumnInfo(name = "unid_sell_price_us") var unidSellPriceUS: Int? = 0,
+    @ColumnInfo(name = "total_cost_us") var totalCostUS: Double? = 0.0,
+    @ColumnInfo(name = "total_received_us") var totalReceivedUS: Int? = 0,
+    @ColumnInfo(name = "total_profit_us") var totalProfitUS: Int? = 0,
+    @ColumnInfo(name = "photo") var photo: String? = ""
 )

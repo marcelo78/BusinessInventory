@@ -2,29 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--    <item-->
-    <!--        android:id="@+id/action_favorite"-->
-    <!--        android:icon="@drawable/ic_action_home"-->
-    <!--        android:title="@string/action_favorite"-->
-    <!--        app:showAsAction="ifRoom" />-->
-
-    <!--    &lt;!&ndash; Settings, should always be in the overflow &ndash;&gt;-->
-    <!--    <item-->
-    <!--        android:id="@+id/action_settings"-->
-    <!--        android:title="@string/action_settings"-->
-    <!--        app:showAsAction="never" />-->
-    <item
-        android:id="@+id/action_home"
-        android:icon="@drawable/ic_action_home"
-        android:title="Home" />
     <item
         android:id="@+id/action_search_by_name"
         android:icon="@drawable/ic_filter_list_50dp"
         android:title="Search by Name"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_search_by_barcode"
         android:icon="@drawable/ic_action_home"
-        android:title="Search by Barcode" />
+        android:title="Search by Barcode"
+        app:showAsAction="never" />
 
 </menu>

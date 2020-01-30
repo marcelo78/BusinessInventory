@@ -8,4 +8,11 @@
     <color name="colorExportFragment">#808080</color>
     <color name="some_darker_blue_color">#4C2F27</color>
     <color name="some_lighter_gray_color">#757575</color>
+    <color name="text_color_nav_bar_active">#000000</color>
+    <color name="text_color_nav_bar_inactive">#C1C1C1</color>
+    <color name="card_background_color">#E6E6E6</color>
+
+    <color name="red">#f00</color>
+    <color name="white">#fff</color>
+    <color name="blue">#4285F4</color>
 </resources>
