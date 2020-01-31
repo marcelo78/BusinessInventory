@@ -11,6 +11,7 @@ interface Search {
 
     interface Presenter {
         fun getItems(activity: Activity)
+
         fun showItems(items: List<ProductEntity>)
     }
 

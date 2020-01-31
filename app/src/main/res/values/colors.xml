@@ -13,6 +13,6 @@
     <color name="card_background_color">#E6E6E6</color>
 
     <color name="red">#f00</color>
-    <color name="white">#fff</color>
+    <color name="white">#FFFFFF</color>
     <color name="blue">#4285F4</color>
 </resources>
