@@ -98,4 +98,67 @@ class AddDetailItemPresenter(private var view: AddDetailItem.View) : AddDetailIt
         return true
     }
 
+    override fun validateChangedField(productOld: ProductEntity, product: ProductEntity): Boolean {
+        return product != productOld
+    }
+
+    override fun updateData(product: ProductEntity, value: String, idEditText: Int) {
+        when (idEditText) {
+            R.id.etBoughtNo, R.id.etSoldNo -> {
+                if (idEditText.compareTo(R.id.etBoughtNo) == 0) {
+                    product.boughtNo = value.toDouble()
+                } else {
+                    product.soldNo = value.toDouble()
+                }
+                product.totalCostUS = product.boughtNo?.times(product.unidBuyPriceUS!!)
+
+                product.totalReceivedUS = product.soldNo?.times(product.unidSellPriceUS!!)?.toInt()
+
+                product.totalProfitUS =
+                    product.totalReceivedUS?.minus(product.totalCostUS!!.toInt())
+            }
+            R.id.etUnidBuyPrice -> {
+                product.unidBuyPriceUS = value.toInt()
+                product.totalCostUS = product.boughtNo?.times(product.unidBuyPriceUS!!)
+                product.totalProfitUS =
+                    product.totalReceivedUS?.minus(product.totalCostUS!!.toInt())
+            }
+            R.id.etUnidSellPrice -> {
+                product.unidSellPriceUS = value.toInt()
+                product.totalReceivedUS = product.soldNo?.toInt()?.times(product.unidSellPriceUS!!)
+                product.totalProfitUS =
+                    product.totalReceivedUS?.minus(product.totalCostUS!!.toInt())
+
+            }
+            R.id.etTotalCost -> {
+                product.totalCostUS = value.toDouble()
+                val soldNo = product.soldNo ?: 0.0
+                val unidSellPriceUs = product?.unidSellPriceUS ?: 0
+                if ((soldNo > 0) && unidSellPriceUs > 0) {
+                    product.totalReceivedUS =
+                        product.soldNo?.toInt()?.times(product.unidSellPriceUS!!)
+                }
+                val totalCostUS = product.totalCostUS ?: 0.0
+                if (totalCostUS > 0) {
+                    product.totalProfitUS =
+                        product.totalReceivedUS?.minus(product.totalCostUS!!.toInt())
+
+                }
+                product.unidBuyPriceUS = 0
+            }
+            R.id.etTotalReceived -> {
+                product.totalReceivedUS = value.toInt()
+                val totalCostUS = product.totalCostUS ?: 0.0
+                if (totalCostUS > 0) {
+                    product.totalProfitUS =
+                        product.totalReceivedUS?.minus(product.totalCostUS!!.toInt())
+
+                }
+                product.unidSellPriceUS = 0
+            }
+        }
+
+        view.populate(listOf(product))
+    }
+
 }
