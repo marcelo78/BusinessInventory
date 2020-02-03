@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ma.businessinventory.R
 import com.ma.businessinventory.adapter.ItemAdapter
 import com.ma.businessinventory.db.entity.ProductEntity
 import com.ma.businessinventory.ui.main.MainActivity
+import kotlinx.android.synthetic.main.fragment_search.*
 
 /**
  *
@@ -23,11 +22,7 @@ class SearchFragment : Fragment(), Search.View {
         private val TAG = SearchFragment::class.java.simpleName
     }
 
-    private lateinit var listItems: RecyclerView
-
     private lateinit var presenter: Search.Presenter
-
-    private lateinit var fabAddItem: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +36,12 @@ class SearchFragment : Fragment(), Search.View {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_search, container, false)
-        listItems = view.findViewById(R.id.listItems)
-        fabAddItem = view.findViewById(R.id.fabAddItem)
-        init()
-        return view
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
-    fun init() {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
         listItems.layoutManager = LinearLayoutManager(context)
         presenter.getItems(activity!!)
         fabAddItem.setOnClickListener {

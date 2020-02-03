@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.db.entity.SummaryEntity
 import kotlinx.coroutines.launch
 
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
@@ -19,6 +20,7 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
 
     // LiveData gives us updated words when they change.
     val allProducts: LiveData<List<ProductEntity>>
+    val allSummary: LiveData<List<SummaryEntity>>
 
     init {
         // Gets reference to WordDao from WordRoomDatabase to construct
@@ -26,6 +28,7 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         val productDao = AppDatabase.getDatabase(application, viewModelScope).productDao()
         repository = ProductRepository(productDao)
         allProducts = repository.allProducts
+        allSummary = repository.allSummary
     }
 
     /**
@@ -52,4 +55,5 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     fun getItem(ids: Long): LiveData<List<ProductEntity>> {
         return repository.getItem(ids)
     }
+
 }

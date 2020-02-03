@@ -39,4 +39,25 @@
     <string name="btn_save_detail">Save</string>
 
     <string name="error_message">Empty Field</string>
+
+    <string name="txt_view_current_us">Current Inventory US$</string>
+    <string name="txt_view_current_no">Current Inventory US#</string>
+    <string name="txt_view_inventory_sold">Inventory Sold #</string>
+    <string name="txt_view_profit_margin">Profit Margin %</string>
+    <string name="txt_view_accum_profits_us">Accum. Profits US$</string>
+    <string name="txt_view_net_profit_us">Net Profit US$</string>
+    <string name="txt_view_total_bought_us">Total Bought US$</string>
+    <string name="txt_view_total_sold_us">Total Sold US$</string>
+
+    <string name="dialog_detail_yes">Yes</string>
+    <string name="dialog_detail_no">No</string>
+    <string name="dialog_detail_cancel">Cancel</string>
+    <string name="dialog_detail_title">"Really Exit?"</string>
+    <string name="dialog_detail_message">"Could lose information.\nAre you sure you want to exit?"</string>
+
+    <string name="dialog_delete_item_yes">Yes</string>
+    <string name="dialog_delete_item_no">No</string>
+    <string name="dialog_delete_item_cancel">Cancel</string>
+    <string name="dialog_delete_item_title">"Really Delete?"</string>
+    <string name="dialog_delete_item_message">"Are you sure to delete this?"</string>
 </resources>

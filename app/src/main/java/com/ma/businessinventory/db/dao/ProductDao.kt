@@ -3,6 +3,7 @@ package com.ma.businessinventory.db.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.db.entity.SummaryEntity
 
 @Dao
 interface ProductDao {
@@ -30,5 +31,8 @@ interface ProductDao {
 
     @Update
     suspend fun update(product: ProductEntity): Int
+
+    @Query("SELECT SUM((bought_no - sold_no) * unid_buy_price_us) data1, SUM(CASE WHEN bought_no = sold_no THEN bought_no ELSE (bought_no - sold_no) END) data2, SUM(CASE WHEN bought_no = sold_no THEN 0 ELSE (sold_no) END) data3, ROUND(SUM(total_profit_us), 2) data4, ROUND(SUM(total_cost_us), 2) data5, ROUND(SUM(sold_no * unid_sell_price_us), 2) data6 FROM product")
+    fun getSummary(): LiveData<List<SummaryEntity>>
 
 }

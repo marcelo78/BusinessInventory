@@ -1,5 +1,6 @@
 package com.ma.businessinventory.ui.detailitem
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -49,8 +50,7 @@ class ItemDetailActivity : AppCompatActivity(), Communicator, ItemDetail.View {
 
         btnDelete.setOnClickListener {
             Log.d(TAG, "btnDelete.setOnClickListener")
-            val product = ProductEntity(idItem)
-            presenter.deleteItem(product, this)
+            showAlert()
         }
 
         // Show the Up button in the action bar.
@@ -103,6 +103,24 @@ class ItemDetailActivity : AppCompatActivity(), Communicator, ItemDetail.View {
     override fun showResult() {
         Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show()
         finish()
+    }
+
+    private fun showAlert() {
+        val builder = AlertDialog.Builder(this@ItemDetailActivity)
+        builder.setTitle(getString(R.string.dialog_delete_item_title))
+        builder.setMessage(getString(R.string.dialog_delete_item_message))
+        builder.setPositiveButton(getString(R.string.dialog_delete_item_yes)) { _, _ ->
+            val product = ProductEntity(idItem)
+            presenter.deleteItem(product, this)
+        }
+        builder.setNegativeButton(getText(R.string.dialog_delete_item_no)) { _, _ ->
+            Log.d(TAG, "You are not agree.")
+        }
+        builder.setNeutralButton(getString(R.string.dialog_delete_item_cancel)) { _, _ ->
+            Log.d(TAG, "You cancelled the dialog.")
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
 }

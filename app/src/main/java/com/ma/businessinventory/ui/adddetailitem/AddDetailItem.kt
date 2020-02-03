@@ -33,6 +33,10 @@ interface AddDetailItem {
         fun showItem(product: List<ProductEntity>)
 
         fun validate(product: ProductEntity): Boolean
+
+        fun validateChangedField(productOld: ProductEntity, product: ProductEntity): Boolean
+
+        fun updateData(product: ProductEntity, value: String, idEditText: Int)
     }
 
     interface Model {
