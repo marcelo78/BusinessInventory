@@ -60,4 +60,6 @@
     <string name="dialog_delete_item_cancel">Cancel</string>
     <string name="dialog_delete_item_title">"Really Delete?"</string>
     <string name="dialog_delete_item_message">"Are you sure to delete this?"</string>
+
+    <string name="main_menu_search_by_name">Search by Name</string>
 </resources>

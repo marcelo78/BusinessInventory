@@ -6,16 +6,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.ma.businessinventory.R
 import com.ma.businessinventory.db.entity.ProductEntity
 import com.ma.businessinventory.ui.main.MainActivity
 import kotlinx.android.synthetic.main.list_item.view.*
+import java.util.*
 
-class ItemAdapter(private val items: List<ProductEntity>, val context: Context) :
-    RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter(private val items: MutableList<ProductEntity>, val context: Context) :
+    RecyclerView.Adapter<ItemAdapter.ViewHolder>(), Filterable {
 
     private val onClickListener: View.OnClickListener
+    private var itemsFull: MutableList<ProductEntity> = mutableListOf()
 
     init {
         onClickListener = View.OnClickListener { view ->
@@ -23,6 +27,7 @@ class ItemAdapter(private val items: List<ProductEntity>, val context: Context) 
             val idItem: Int = view.tag.toString().toInt()
             (context as MainActivity).openAddItemActivity(idItem)
         }
+        itemsFull.addAll(items)
     }
 
     companion object {
@@ -77,4 +82,42 @@ class ItemAdapter(private val items: List<ProductEntity>, val context: Context) 
         val cardView = view.cardView
     }
 
+    override fun getFilter(): Filter {
+        return filterItems
+    }
+
+    private var filterItems = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            var filteredList: MutableList<ProductEntity> = mutableListOf()
+
+            if (constraint == null || constraint.isEmpty()) {
+                filteredList = itemsFull
+            } else {
+                val filterPatterns = constraint.toString().toLowerCase(Locale.getDefault()).trim()
+
+                for (item: ProductEntity in itemsFull) {
+                    if (item.nameInventory?.toLowerCase(Locale.getDefault())!!.contains(
+                            filterPatterns
+                        )
+                    ) {
+                        filteredList.add(item)
+                    }
+                }
+            }
+
+            val results = FilterResults()
+            results.values = filteredList
+            return results
+
+        }
+
+        @Suppress("UNCHECKED_CAST")
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            items.clear()
+            items.addAll(results?.values as MutableList<ProductEntity>)
+            notifyDataSetChanged()
+        }
+
+
+    }
 }

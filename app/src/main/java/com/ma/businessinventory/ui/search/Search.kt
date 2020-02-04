@@ -6,13 +6,15 @@ import com.ma.businessinventory.db.entity.ProductEntity
 interface Search {
 
     interface View {
-        fun showItems(items: List<ProductEntity>)
+        fun showItems(items: MutableList<ProductEntity>)
+
+        fun showFilterbyName(name: String)
     }
 
     interface Presenter {
         fun getItems(activity: Activity)
 
-        fun showItems(items: List<ProductEntity>)
+        fun showItems(items: MutableList<ProductEntity>)
     }
 
     interface Model {

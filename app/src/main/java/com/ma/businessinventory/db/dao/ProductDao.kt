@@ -9,7 +9,7 @@ import com.ma.businessinventory.db.entity.SummaryEntity
 interface ProductDao {
 
     @Query("SELECT * FROM product ORDER BY 2 ASC")
-    fun getAll(): LiveData<List<ProductEntity>>
+    fun getAll(): LiveData<MutableList<ProductEntity>>
 
     @Query("SELECT * FROM product WHERE id=:ids")
     fun loadAllByIds(ids: Long): LiveData<List<ProductEntity>>
