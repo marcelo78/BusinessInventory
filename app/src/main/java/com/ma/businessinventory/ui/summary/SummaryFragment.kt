@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ma.businessinventory.R
 import com.ma.businessinventory.db.entity.SummaryEntity
+import com.ma.businessinventory.tools.NumberUtil
 import kotlinx.android.synthetic.main.fragment_summary.*
 
 /**
@@ -41,15 +42,16 @@ class SummaryFragment : Fragment(), Summary.View {
 
         Log.d(TAG, "Show items")
         if (items.isNotEmpty()) {
+            val df = NumberUtil.getInstance()
             val item = items[0]
-            viewCurrentUs.text = item.data1.toString()
-            viewCurrentNo.text = item.data2.toString()
-            viewInventorySold.text = item.data3.toString()
-            viewProfitMargin.text = ((item.data4 / item.data5) * 100).toString()
-            viewAccumProfitsUs.text = (item.data1 - item.data4).toString()
-            viewNetProfitUs.text = item.data4.toString()
-            viewTotalBoughtUs.text = item.data5.toString()
-            viewTotalSoldUs.text = item.data6.toString()
+            viewCurrentUs.text = df?.format(item.data1)
+            viewCurrentNo.text = df?.format(item.data2)
+            viewInventorySold.text = df?.format(item.data3)
+            viewProfitMargin.text = df?.format(((item.data4 / item.data5) * 100))
+            viewAccumProfitsUs.text = df?.format((item.data1 - item.data4))
+            viewNetProfitUs.text = df?.format(item.data4)
+            viewTotalBoughtUs.text = df?.format(item.data5)
+            viewTotalSoldUs.text = df?.format(item.data6)
         }
 
     }
