@@ -134,7 +134,7 @@ class AddDetailItemPresenter(private var view: AddDetailItem.View) : AddDetailIt
                 product.totalCostUS = value.toDouble()
                 val soldNo = product.soldNo ?: 0.0
                 val unidSellPriceUs = product.unidSellPriceUS ?: 0
-                if ((soldNo > 0) && unidSellPriceUs > 0) {
+                if (soldNo > 0 && unidSellPriceUs > 0) {
                     product.totalReceivedUS =
                         product.soldNo?.toInt()?.times(product.unidSellPriceUS!!)
                 }

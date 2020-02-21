@@ -22,7 +22,6 @@ interface ItemDetail {
         fun deleteItem(product: ProductEntity, activity: Activity)
 
         fun showResult()
-
     }
 
     interface Model {
