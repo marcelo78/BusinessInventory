@@ -3,7 +3,7 @@ package com.ma.businessinventory.ui.adddetailitem
 import android.app.Activity
 import com.ma.businessinventory.db.entity.ProductEntity
 
-interface AddDetailItem {
+interface IAddDetailItem {
 
     interface View {
         fun showResult()

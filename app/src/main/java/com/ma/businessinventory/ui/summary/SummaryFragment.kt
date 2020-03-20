@@ -14,13 +14,13 @@ import kotlinx.android.synthetic.main.fragment_summary.*
 /**
  *
  */
-class SummaryFragment : Fragment(), Summary.View {
+class SummaryFragment : Fragment(), ISummary.View {
 
     companion object {
         private val TAG = SummaryFragment::class.java.simpleName
     }
 
-    private lateinit var presenter: Summary.Presenter
+    private lateinit var presenter: ISummary.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

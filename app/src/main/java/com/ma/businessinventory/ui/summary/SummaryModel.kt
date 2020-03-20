@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.ma.businessinventory.MyApplication
 
-class SummaryModel(private var presenter: Summary.Presenter) : Summary.Model {
+class SummaryModel(private var presenter: ISummary.Presenter) : ISummary.Model {
 
     override fun getSummary(activity: Activity) {
 

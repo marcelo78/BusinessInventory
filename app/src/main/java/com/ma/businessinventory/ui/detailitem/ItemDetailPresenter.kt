@@ -3,9 +3,9 @@ package com.ma.businessinventory.ui.detailitem
 import android.app.Activity
 import com.ma.businessinventory.db.entity.ProductEntity
 
-class ItemDetailPresenter(private var view: ItemDetail.View) : ItemDetail.Presenter {
+class ItemDetailPresenter(private var view: IItemDetail.View) : IItemDetail.Presenter {
 
-    private var model: ItemDetail.Model = ItemDetailModel(this)
+    private var model: IItemDetail.Model = ItemDetailModel(this)
 
     override fun getItem(idItem: Long, activity: Activity) {
         model.getItem(idItem, activity)

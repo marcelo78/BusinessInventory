@@ -117,7 +117,5 @@ class ItemAdapter(private val items: MutableList<ProductEntity>, val context: Co
             items.addAll(results?.values as MutableList<ProductEntity>)
             notifyDataSetChanged()
         }
-
-
     }
 }

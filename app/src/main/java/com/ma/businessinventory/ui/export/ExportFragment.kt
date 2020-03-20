@@ -17,13 +17,13 @@ import kotlinx.android.synthetic.main.fragment_export.*
 /**
  *
  */
-class ExportFragment : Fragment(), Export.View {
+class ExportFragment : Fragment(), IExport.View {
 
     companion object {
         private val TAG = ExportFragment::class.java.simpleName
     }
 
-    private lateinit var presenter: Export.Presenter
+    private lateinit var presenter: IExport.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

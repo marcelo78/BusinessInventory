@@ -3,7 +3,7 @@ package com.ma.businessinventory.ui.export
 import android.app.Activity
 import com.ma.businessinventory.db.entity.ProductEntity
 
-interface Export {
+interface IExport {
 
     interface View {
         fun showResult(items: MutableList<ProductEntity>)

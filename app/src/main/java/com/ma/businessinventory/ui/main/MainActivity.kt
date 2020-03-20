@@ -24,7 +24,7 @@ import com.ma.businessinventory.ui.search.Search
 import com.ma.businessinventory.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), Main.View,
+class MainActivity : AppCompatActivity(), IMain.View,
     BottomNavigationView.OnNavigationItemSelectedListener {
 
     companion object {

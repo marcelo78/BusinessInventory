@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.ma.businessinventory.MyApplication
 
-class ExportModel(private var presenter: Export.Presenter) : Export.Model {
+class ExportModel(private var presenter: IExport.Presenter) : IExport.Model {
 
     override fun getItems(activity: Activity) {
         val productViewModel = (activity.application as MyApplication).productViewModel

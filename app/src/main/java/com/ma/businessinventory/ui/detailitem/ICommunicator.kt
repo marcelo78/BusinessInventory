@@ -1,6 +1,6 @@
 package com.ma.businessinventory.ui.detailitem
 
-interface Communicator {
+interface ICommunicator {
 
     fun loadCoverImage(idItem: Long, path: String)
 

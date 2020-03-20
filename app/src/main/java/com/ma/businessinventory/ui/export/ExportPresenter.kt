@@ -4,9 +4,9 @@ import android.app.Activity
 import android.util.Log
 import com.ma.businessinventory.db.entity.ProductEntity
 
-class ExportPresenter(private var view: Export.View) : Export.Presenter {
+class ExportPresenter(private var view: IExport.View) : IExport.Presenter {
 
-    private var model: Export.Model = ExportModel(this)
+    private var model: IExport.Model = ExportModel(this)
 
     override fun getItems(activity: Activity) {
         model.getItems(activity)
