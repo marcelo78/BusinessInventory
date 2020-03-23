@@ -1,4 +1,4 @@
-package com.ma.businessinventory.ui.summary
+package com.ma.businessinventory.ui.export
 
 import android.app.Activity
 import android.util.Log
@@ -6,15 +6,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.ma.businessinventory.MyApplication
 
-class SummaryModel(private var presenter: ISummary.Presenter) : ISummary.Model {
+class ExportModel(private var presenter: IExport.Presenter) : IExport.Model {
 
-    override fun getSummary(activity: Activity) {
-
+    override fun getItems(activity: Activity) {
         val productViewModel = (activity.application as MyApplication).productViewModel
 
-        productViewModel.allSummary.observe(activity as LifecycleOwner, Observer { products ->
+        productViewModel.allProducts.observe(activity as LifecycleOwner, Observer { products ->
             // Update the cached copy of the items in the adapter.
-            Log.d("SummaryModel", "****************************")
+            Log.d("", "****************************")
             products.let {
                 presenter.showItems(it)
             }

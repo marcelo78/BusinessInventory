@@ -4,11 +4,11 @@ import android.app.Activity
 import com.ma.businessinventory.R
 import com.ma.businessinventory.db.entity.ProductEntity
 
-class AddDetailItemPresenter(private var view: AddDetailItem.View) : AddDetailItem.Presenter {
+class AddDetailItemPresenter(private var view: IAddDetailItem.View) : IAddDetailItem.Presenter {
 
-    private var model: AddDetailItem.Model = AddDetailItemModel(this)
+    private var model: IAddDetailItem.Model = AddDetailItemModel(this)
 
-    override fun insertItem(product: ProductEntity, activity: Activity) {
+    override suspend fun insertItem(product: ProductEntity, activity: Activity) {
         model.insertItem(product, activity)
     }
 
@@ -16,7 +16,7 @@ class AddDetailItemPresenter(private var view: AddDetailItem.View) : AddDetailIt
         model.updateItem(product, activity)
     }
 
-    override fun deleteItem(product: ProductEntity, activity: Activity) {
+    override suspend fun deleteItem(product: ProductEntity, activity: Activity) {
         model.deleteItem(product, activity)
     }
 
@@ -133,8 +133,8 @@ class AddDetailItemPresenter(private var view: AddDetailItem.View) : AddDetailIt
             R.id.etTotalCost -> {
                 product.totalCostUS = value.toDouble()
                 val soldNo = product.soldNo ?: 0.0
-                val unidSellPriceUs = product?.unidSellPriceUS ?: 0
-                if ((soldNo > 0) && unidSellPriceUs > 0) {
+                val unidSellPriceUs = product.unidSellPriceUS ?: 0
+                if (soldNo > 0 && unidSellPriceUs > 0) {
                     product.totalReceivedUS =
                         product.soldNo?.toInt()?.times(product.unidSellPriceUS!!)
                 }

@@ -16,10 +16,10 @@ import kotlinx.android.synthetic.main.activity_item_detail.*
 /**
  *
  */
-class ItemDetailActivity : AppCompatActivity(), Communicator, ItemDetail.View {
+class ItemDetailActivity : AppCompatActivity(), ICommunicator, IItemDetail.View {
 
     private var idItem = 0L
-    private lateinit var presenter: ItemDetail.Presenter
+    private lateinit var presenter: IItemDetail.Presenter
 
     companion object {
         private val TAG = ItemDetailActivity::class.java.simpleName

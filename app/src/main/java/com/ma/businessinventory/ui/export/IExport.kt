@@ -1,14 +1,12 @@
-package com.ma.businessinventory.ui.search
+package com.ma.businessinventory.ui.export
 
 import android.app.Activity
 import com.ma.businessinventory.db.entity.ProductEntity
 
-interface Search {
+interface IExport {
 
     interface View {
-        fun showItems(items: MutableList<ProductEntity>)
-
-        fun showFilterbyName(name: String)
+        fun showResult(items: MutableList<ProductEntity>)
     }
 
     interface Presenter {

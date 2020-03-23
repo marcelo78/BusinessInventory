@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.ma.businessinventory.MyApplication
 import com.ma.businessinventory.db.entity.ProductEntity
 
-class ItemDetailModel(private var presenter: ItemDetail.Presenter) : ItemDetail.Model {
+class ItemDetailModel(private var presenter: IItemDetail.Presenter) : IItemDetail.Model {
 
     override fun getItem(idItem: Long, activity: Activity) {
         val productViewModel = (activity.application as MyApplication).productViewModel

@@ -9,7 +9,7 @@ class ProductRepository(private val productDao: ProductDao) {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    val allProducts: LiveData<List<ProductEntity>> = productDao.getAll()
+    val allProducts: LiveData<MutableList<ProductEntity>> = productDao.getAll()
 
     suspend fun insert(productEntity: ProductEntity) {
         productDao.insert(productEntity)

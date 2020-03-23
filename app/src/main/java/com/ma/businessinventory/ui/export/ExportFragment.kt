@@ -1,28 +1,34 @@
 package com.ma.businessinventory.ui.export
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.ma.businessinventory.R
+import com.ma.businessinventory.db.entity.ProductEntity
+import kotlinx.android.synthetic.main.fragment_export.*
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [ExportFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [ExportFragment.newInstance] factory method to
- * create an instance of this fragment.
+ *
  */
-class ExportFragment : Fragment() {
+class ExportFragment : Fragment(), IExport.View {
+
+    companion object {
+        private val TAG = ExportFragment::class.java.simpleName
+    }
+
+    private lateinit var presenter: IExport.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        presenter = ExportPresenter(this)
     }
 
     override fun onCreateView(
@@ -33,23 +39,36 @@ class ExportFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_export, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ExportFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ExportFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        if (ActivityCompat.checkSelfPermission(
+                activity!!.applicationContext,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            ActivityCompat.requestPermissions(
+                activity!!, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1
+            )
+
+            return
+        }
+
+
+        btnExportExl.setOnClickListener {
+            Log.d(TAG, "click button")
+
+            presenter.getItems(activity!!)
+
+
+//            WordBook
+
+        }
     }
+
+    override fun showResult(items: MutableList<ProductEntity>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }

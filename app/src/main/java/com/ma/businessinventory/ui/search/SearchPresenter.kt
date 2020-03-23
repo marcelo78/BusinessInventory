@@ -11,7 +11,7 @@ class SearchPresenter(private var view: Search.View) : Search.Presenter {
         model.getItems(activity)
     }
 
-    override fun showItems(items: List<ProductEntity>) {
+    override fun showItems(items: MutableList<ProductEntity>) {
         view.showItems(items)
     }
 

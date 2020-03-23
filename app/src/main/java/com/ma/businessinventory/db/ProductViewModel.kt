@@ -19,7 +19,7 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     private val repository: ProductRepository
 
     // LiveData gives us updated words when they change.
-    val allProducts: LiveData<List<ProductEntity>>
+    val allProducts: LiveData<MutableList<ProductEntity>>
     val allSummary: LiveData<List<SummaryEntity>>
 
     init {

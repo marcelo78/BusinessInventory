@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.ma.businessinventory.MyApplication
 import com.ma.businessinventory.db.entity.ProductEntity
 
-class AddDetailItemModel(private var presenter: AddDetailItem.Presenter) : AddDetailItem.Model {
+class AddDetailItemModel(private var presenter: IAddDetailItem.Presenter) : IAddDetailItem.Model {
 
     override fun insertItem(product: ProductEntity, activity: Activity) {
         (activity.application as MyApplication).productViewModel.insert(product)

@@ -3,7 +3,7 @@ package com.ma.businessinventory.ui.detailitem
 import android.app.Activity
 import com.ma.businessinventory.db.entity.ProductEntity
 
-interface ItemDetail {
+interface IItemDetail {
 
     interface View {
 
@@ -22,7 +22,6 @@ interface ItemDetail {
         fun deleteItem(product: ProductEntity, activity: Activity)
 
         fun showResult()
-
     }
 
     interface Model {

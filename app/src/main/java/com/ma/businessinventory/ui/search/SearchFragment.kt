@@ -2,6 +2,7 @@ package com.ma.businessinventory.ui.search
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ class SearchFragment : Fragment(), Search.View {
     }
 
     private lateinit var presenter: Search.Presenter
+    private lateinit var itemAdapter: ItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +51,16 @@ class SearchFragment : Fragment(), Search.View {
         }
     }
 
-    override fun showItems(items: List<ProductEntity>) {
+    override fun showItems(items: MutableList<ProductEntity>) {
         val context = activity as Context
 
-        val itemAdapter = ItemAdapter(items, context)
+        itemAdapter = ItemAdapter(items, context)
         listItems.adapter = itemAdapter
+    }
+
+    override fun showFilterbyName(name: String) {
+        Log.d(TAG, "Text: $name")
+        itemAdapter.filter.filter(name)
     }
 
 }

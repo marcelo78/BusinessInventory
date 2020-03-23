@@ -15,10 +15,10 @@ import kotlinx.android.synthetic.main.activity_item_detail.*
 /**
  *
  */
-class ItemDetailFragment : Fragment(), ItemDetail.View {
+class ItemDetailFragment : Fragment(), IItemDetail.View {
 
-    private lateinit var presenter: ItemDetail.Presenter
-    private lateinit var comm: Communicator
+    private lateinit var presenter: IItemDetail.Presenter
+    private lateinit var comm: ICommunicator
 
     private lateinit var tvDate: TextView
     private lateinit var tvPrice: TextView
@@ -30,7 +30,7 @@ class ItemDetailFragment : Fragment(), ItemDetail.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        comm = activity as Communicator
+        comm = activity as ICommunicator
         presenter = ItemDetailPresenter(this)
 
         arguments?.let {

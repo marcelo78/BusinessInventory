@@ -14,11 +14,11 @@ import com.ma.businessinventory.db.entity.ProductEntity
 import kotlinx.android.synthetic.main.activity_add_detail_item.*
 
 
-class AddDetailItemActivity : AppCompatActivity(), AddDetailItem.View {
+class AddDetailItemActivity : AppCompatActivity(), IAddDetailItem.View {
 
     private var idItem: Long = 0
 
-    private lateinit var presenter: AddDetailItem.Presenter
+    private lateinit var presenter: IAddDetailItem.Presenter
     private lateinit var product: ProductEntity
     private lateinit var productOld: ProductEntity
 
