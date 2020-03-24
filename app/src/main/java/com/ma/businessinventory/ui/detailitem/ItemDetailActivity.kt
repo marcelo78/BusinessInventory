@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ma.businessinventory.R
-import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.db.entities.ProductEntity
 import com.ma.businessinventory.ui.adddetailitem.AddDetailItemActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_item_detail.*

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ma.businessinventory.R
-import com.ma.businessinventory.db.entity.SummaryEntity
+import com.ma.businessinventory.db.entities.SummaryEntity
 import com.ma.businessinventory.tools.NumberUtil
 import kotlinx.android.synthetic.main.fragment_summary.*
 

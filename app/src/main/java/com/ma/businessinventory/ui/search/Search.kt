@@ -1,7 +1,8 @@
 package com.ma.businessinventory.ui.search
 
 import android.app.Activity
-import com.ma.businessinventory.db.entity.ProductEntity
+import androidx.lifecycle.LiveData
+import com.ma.businessinventory.db.entities.ProductEntity
 
 interface Search {
 
@@ -12,9 +13,9 @@ interface Search {
     }
 
     interface Presenter {
-        fun getItems(activity: Activity)
+        fun getItems(): LiveData<MutableList<ProductEntity>>
 
-        fun showItems(items: MutableList<ProductEntity>)
+//        fun showItems(items: MutableList<ProductEntity>)
     }
 
     interface Model {

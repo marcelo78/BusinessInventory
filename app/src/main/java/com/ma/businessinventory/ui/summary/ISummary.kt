@@ -1,7 +1,7 @@
 package com.ma.businessinventory.ui.summary
 
 import android.app.Activity
-import com.ma.businessinventory.db.entity.SummaryEntity
+import com.ma.businessinventory.db.entities.SummaryEntity
 
 interface ISummary {
 

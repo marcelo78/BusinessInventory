@@ -10,8 +10,11 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ma.businessinventory.R
-import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.db.entities.ProductEntity
 import kotlinx.android.synthetic.main.activity_add_detail_item.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 
 class AddDetailItemActivity : AppCompatActivity(), IAddDetailItem.View {
@@ -74,7 +77,12 @@ class AddDetailItemActivity : AppCompatActivity(), IAddDetailItem.View {
             val valid = presenter.validate(product)
             if (valid) {
                 if (idItem == 0L) {
-                    presenter.insertItem(product, this)
+                    CoroutineScope(IO).launch {
+                        (presenter as AddDetailItemPresenter).insertItem(
+                            product,
+                            this@AddDetailItemActivity
+                        )
+                    }
                 } else {
                     presenter.updateItem(product, this)
                 }

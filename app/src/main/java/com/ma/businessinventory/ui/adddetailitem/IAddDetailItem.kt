@@ -1,7 +1,7 @@
 package com.ma.businessinventory.ui.adddetailitem
 
 import android.app.Activity
-import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.db.entities.ProductEntity
 
 interface IAddDetailItem {
 
@@ -18,11 +18,11 @@ interface IAddDetailItem {
     }
 
     interface Presenter {
-        fun insertItem(product: ProductEntity, activity: Activity)
+        suspend fun insertItem(product: ProductEntity, activity: Activity)
 
         fun updateItem(product: ProductEntity, activity: Activity)
 
-        fun deleteItem(product: ProductEntity, activity: Activity)
+        suspend fun deleteItem(product: ProductEntity, activity: Activity)
 
         fun showResult()
 

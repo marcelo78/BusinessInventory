@@ -10,7 +10,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.ma.businessinventory.R
-import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.db.entities.ProductEntity
 import com.ma.businessinventory.ui.main.MainActivity
 import kotlinx.android.synthetic.main.list_item.view.*
 import java.util.*

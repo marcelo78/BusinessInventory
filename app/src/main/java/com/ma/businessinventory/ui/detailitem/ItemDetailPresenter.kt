@@ -1,7 +1,7 @@
 package com.ma.businessinventory.ui.detailitem
 
 import android.app.Activity
-import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.db.entities.ProductEntity
 
 class ItemDetailPresenter(private var view: IItemDetail.View) : IItemDetail.Presenter {
 

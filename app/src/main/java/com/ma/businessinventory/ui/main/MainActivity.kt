@@ -81,8 +81,8 @@ class MainActivity : AppCompatActivity(), IMain.View,
         })
 
         // Get a new or existing ViewModel from the ViewModelProvider.
-        (this.application as MyApplication).productViewModel =
-            ViewModelProvider(this).get(ProductViewModel::class.java)
+//        (this.application as MyApplication).productViewModel =
+//            ViewModelProvider(this).get(ProductViewModel::class.java)
     }
 
     override fun onResume() {
