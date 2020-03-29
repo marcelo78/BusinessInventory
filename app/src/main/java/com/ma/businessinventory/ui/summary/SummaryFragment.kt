@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.ma.businessinventory.R
 import com.ma.businessinventory.db.entities.SummaryEntity
 import com.ma.businessinventory.tools.NumberUtil
 import kotlinx.android.synthetic.main.fragment_summary.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  *
@@ -20,15 +22,7 @@ class SummaryFragment : Fragment(), ISummary.View {
         private val TAG = SummaryFragment::class.java.simpleName
     }
 
-    private lateinit var presenter: ISummary.Presenter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        presenter = SummaryPresenter(this)
-
-        presenter.getSummary(activity!!)
-    }
+    private val summaryPresenter: SummaryPresenter by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +30,15 @@ class SummaryFragment : Fragment(), ISummary.View {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_summary, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        summaryPresenter.getItems().observe(viewLifecycleOwner, Observer { summary ->
+            showItems(summary)
+        })
+
     }
 
     override fun showItems(items: List<SummaryEntity>) {

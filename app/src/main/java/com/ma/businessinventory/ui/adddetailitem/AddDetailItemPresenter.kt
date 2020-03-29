@@ -1,108 +1,81 @@
 package com.ma.businessinventory.ui.adddetailitem
 
-import android.app.Activity
+import android.util.Log
+import androidx.lifecycle.ViewModel
 import com.ma.businessinventory.R
 import com.ma.businessinventory.db.entities.ProductEntity
+import com.ma.businessinventory.db.interactor.IProductInteractor
+import io.reactivex.Observable
+import java.util.*
 
-class AddDetailItemPresenter(private var view: IAddDetailItem.View) : IAddDetailItem.Presenter {
+class AddDetailItemPresenter(private val iProductInteractor: IProductInteractor) :
+    IAddDetailItem.Presenter, ViewModel() {
 
-    private var model: IAddDetailItem.Model = AddDetailItemModel(this)
-
-    override suspend fun insertItem(product: ProductEntity, activity: Activity) {
-        model.insertItem(product, activity)
+    override fun insertItem(product: ProductEntity) {
+        Log.d("AddDetailItemPresenter", "insertItem")
+        iProductInteractor.insert(product)
     }
 
-    override fun updateItem(product: ProductEntity, activity: Activity) {
-        model.updateItem(product, activity)
+    override fun updateItem(product: ProductEntity) {
+        iProductInteractor.update(product)
     }
 
-    override suspend fun deleteItem(product: ProductEntity, activity: Activity) {
-        model.deleteItem(product, activity)
+    override fun getItem(idItem: Long): Observable<ProductEntity> {
+        return iProductInteractor.loadAllByIds(idItem)
     }
 
-    override fun showResult() {
-        view.showResult()
-    }
+    override fun validate(product: ProductEntity): Map<String, Int> {
 
-    override fun showError() {
-        view.showError()
-    }
-
-    override fun getItem(idItem: Long, activity: Activity) {
-        model.getItem(idItem, activity)
-    }
-
-    override fun showItem(product: List<ProductEntity>) {
-        view.populate(product)
-    }
-
-    override fun validate(product: ProductEntity): Boolean {
-        view.clearPreErrors()
-        val activity = (view as Activity)
         if (product.nameInventory!!.isEmpty()) {
-            view.showErrorMessage(R.id.etName, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etName, "message" to R.string.error_message)
         }
         if (product.place!!.isEmpty()) {
-            view.showErrorMessage(R.id.etPlace, activity.getString(R.string.error_message))
-            return false
+            return mutableMapOf("isValid" to 0, "view" to R.id.etPlace, "message" to R.string.error_message)
         }
         if (product.description!!.isEmpty()) {
-            view.showErrorMessage(R.id.etDescription, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etDescription, "message" to R.string.error_message)
         }
         if (product.type!!.isEmpty()) {
-            view.showErrorMessage(R.id.etType, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etType, "message" to R.string.error_message)
         }
         if (product.dateProduct!!.isEmpty()) {
-            view.showErrorMessage(R.id.etDate, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etDate, "message" to R.string.error_message)
         }
         if (product.barcode!!.isEmpty()) {
-            view.showErrorMessage(R.id.etBarcode, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etBarcode, "message" to R.string.error_message)
         }
         if (product.boughtNo!!.toString().isEmpty()) {
-            view.showErrorMessage(R.id.etBoughtNo, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etBoughtNo, "message" to R.string.error_message)
         }
         if (product.soldNo!!.toString().isEmpty()) {
-            view.showErrorMessage(R.id.etSoldNo, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etSoldNo, "message" to R.string.error_message)
         }
         if (product.unidBuyPriceUS!!.toString().isEmpty()) {
-            view.showErrorMessage(R.id.etUnidBuyPrice, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etUnidBuyPrice, "message" to R.string.error_message)
         }
         if (product.unidSellPriceUS!!.toString().isEmpty()) {
-            view.showErrorMessage(R.id.etUnidSellPrice, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etUnidSellPrice, "message" to R.string.error_message)
         }
         if (product.totalCostUS!!.toString().isEmpty()) {
-            view.showErrorMessage(R.id.etTotalCost, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etTotalCost, "message" to R.string.error_message)
         }
         if (product.totalReceivedUS!!.toString().isEmpty()) {
-            view.showErrorMessage(R.id.etTotalReceived, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etTotalReceived, "message" to R.string.error_message)
         }
         if (product.totalProfitUS!!.toString().isEmpty()) {
-            view.showErrorMessage(R.id.etTotalProfit, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etTotalProfit, "message" to R.string.error_message)
         }
         if (product.photo!!.toString().isEmpty()) {
-            view.showErrorMessage(R.id.etPhoto, activity.getString(R.string.error_message))
-            return false
+            return mapOf("isValid" to 0, "view" to R.id.etPhoto, "message" to R.string.error_message)
         }
-        return true
+        return mapOf("isValid" to 1, "view" to 0, "message" to 0)
     }
 
     override fun validateChangedField(productOld: ProductEntity, product: ProductEntity): Boolean {
         return product != productOld
     }
 
-    override fun updateData(product: ProductEntity, value: String, idEditText: Int) {
+    override fun updateData(product: ProductEntity, value: String, idEditText: Int): ProductEntity {
         when (idEditText) {
             R.id.etBoughtNo, R.id.etSoldNo -> {
                 if (idEditText.compareTo(R.id.etBoughtNo) == 0) {
@@ -158,7 +131,8 @@ class AddDetailItemPresenter(private var view: IAddDetailItem.View) : IAddDetail
             }
         }
 
-        view.populate(listOf(product))
+//        view.populate(listOf(product))
+        return product
     }
 
 }

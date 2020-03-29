@@ -6,15 +6,12 @@ import com.ma.businessinventory.db.entities.ProductEntity
 
 class ExportPresenter(private var view: IExport.View) : IExport.Presenter {
 
-    private var model: IExport.Model = ExportModel(this)
-
     override fun getItems(activity: Activity) {
-        model.getItems(activity)
+
     }
 
     override fun showItems(items: MutableList<ProductEntity>) {
         Log.d("ExportPresenter", "Items: ${items.size}")
-
     }
 
 }

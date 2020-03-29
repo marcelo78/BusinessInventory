@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.util.Log
 import com.ma.businessinventory.db.dao.ProductDao
 import com.ma.businessinventory.db.entities.ProductEntity
+import com.ma.businessinventory.db.entities.SummaryEntity
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class ProductRepository(private val productDao: ProductDao) : IProductRepository {
@@ -24,24 +26,22 @@ class ProductRepository(private val productDao: ProductDao) : IProductRepository
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 run { Log.d("RxJava", "Insert Success") }
-//                { Log.d("RxJava", "Insert Error") }
             }
     }
 
     @SuppressLint("CheckResult")
-    override fun insert(product: ProductEntity) {
-        productDao.insert(product)
+    override fun insert(product: ProductEntity): Disposable {
+        return productDao.insert(product)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 run { Log.d("RxJava", "Insert Success") }
-//                { Log.d("RxJava", "Insert Error") }
             }
     }
 
     @SuppressLint("CheckResult")
-    override fun delete(product: ProductEntity) {
-        productDao.delete(product)
+    override fun delete(product: ProductEntity): Disposable {
+        return productDao.delete(product)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -56,19 +56,19 @@ class ProductRepository(private val productDao: ProductDao) : IProductRepository
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 run { Log.d("RxJava", "Delete all Success") }
-//                { Log.d("RxJava", "Delete all Error") }
             }
     }
 
     @SuppressLint("CheckResult")
-    override fun update(product: ProductEntity) {
-        productDao.update(product)
+    override fun update(product: ProductEntity): Disposable {
+        return productDao.update(product)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 run { Log.d("RxJava", "Update Success") }
-//                { Log.d("RxJava", "Update Error") }
             }
     }
+
+    override fun allSummary(): Observable<MutableList<SummaryEntity>> = productDao.allSummary()
 
 }

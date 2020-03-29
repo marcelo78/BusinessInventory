@@ -1,7 +1,7 @@
 package com.ma.businessinventory.ui.adddetailitem
 
-import android.app.Activity
 import com.ma.businessinventory.db.entities.ProductEntity
+import io.reactivex.Observable
 
 interface IAddDetailItem {
 
@@ -10,7 +10,7 @@ interface IAddDetailItem {
 
         fun showError()
 
-        fun populate(product: List<ProductEntity>)
+        fun populate(product: ProductEntity)
 
         fun clearPreErrors()
 
@@ -18,35 +18,17 @@ interface IAddDetailItem {
     }
 
     interface Presenter {
-        suspend fun insertItem(product: ProductEntity, activity: Activity)
+        fun insertItem(product: ProductEntity)
 
-        fun updateItem(product: ProductEntity, activity: Activity)
+        fun updateItem(product: ProductEntity)
 
-        suspend fun deleteItem(product: ProductEntity, activity: Activity)
+        fun getItem(idItem: Long): Observable<ProductEntity>
 
-        fun showResult()
-
-        fun showError()
-
-        fun getItem(idItem: Long, activity: Activity)
-
-        fun showItem(product: List<ProductEntity>)
-
-        fun validate(product: ProductEntity): Boolean
+        fun validate(product: ProductEntity): Map<String, Int>
 
         fun validateChangedField(productOld: ProductEntity, product: ProductEntity): Boolean
 
-        fun updateData(product: ProductEntity, value: String, idEditText: Int)
-    }
-
-    interface Model {
-        fun insertItem(product: ProductEntity, activity: Activity)
-
-        fun updateItem(product: ProductEntity, activity: Activity)
-
-        fun deleteItem(product: ProductEntity, activity: Activity)
-
-        fun getItem(idItem: Long, activity: Activity)
+        fun updateData(product: ProductEntity, value: String, idEditText: Int): ProductEntity
     }
 
 }

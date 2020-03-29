@@ -13,10 +13,6 @@ import com.ma.businessinventory.R
 import com.ma.businessinventory.db.entities.ProductEntity
 import kotlinx.android.synthetic.main.fragment_export.*
 
-
-/**
- *
- */
 class ExportFragment : Fragment(), IExport.View {
 
     companion object {
@@ -55,20 +51,11 @@ class ExportFragment : Fragment(), IExport.View {
             return
         }
 
-
         btnExportExl.setOnClickListener {
             Log.d(TAG, "click button")
 
             presenter.getItems(activity!!)
-
-
-//            WordBook
-
         }
-    }
-
-    override fun showResult(items: MutableList<ProductEntity>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

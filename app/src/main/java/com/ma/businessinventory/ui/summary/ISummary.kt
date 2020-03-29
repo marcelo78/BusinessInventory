@@ -1,6 +1,7 @@
 package com.ma.businessinventory.ui.summary
 
 import android.app.Activity
+import androidx.lifecycle.LiveData
 import com.ma.businessinventory.db.entities.SummaryEntity
 
 interface ISummary {
@@ -10,12 +11,7 @@ interface ISummary {
     }
 
     interface Presenter {
-        fun getSummary(activity: Activity)
-
-        fun showItems(items: List<SummaryEntity>)
+        fun getItems(): LiveData<MutableList<SummaryEntity>>
     }
 
-    interface Model {
-        fun getSummary(activity: Activity)
-    }
 }

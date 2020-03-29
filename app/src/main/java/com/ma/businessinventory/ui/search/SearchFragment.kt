@@ -25,16 +25,7 @@ class SearchFragment : Fragment() {
 
     private val searchPresenter: SearchPresenter by viewModel()
 
-    //    private lateinit var presenter: Search.Presenter
     private lateinit var itemAdapter: ItemAdapter
-//    private var context = activity?.applicationContext
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        presenter = SearchPresenter(this)
-//        context = activity?.applicationContext
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,29 +40,16 @@ class SearchFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         listItems.layoutManager = LinearLayoutManager(context)
-//        presenter.getItems(activity!!)
+
         fabAddItem.setOnClickListener {
             (activity as MainActivity).openEditItemActivity(0)
         }
 
         searchPresenter.getItems().observe(viewLifecycleOwner, Observer { products ->
             Log.d("initializeUI", "size ${products.size}")
-            val context = activity?.applicationContext
-            itemAdapter = context?.let { ItemAdapter(products, it) }!!
+            itemAdapter = activity?.let { ItemAdapter(products, it) }!!
             listItems.adapter = itemAdapter
         })
     }
-
-//    override fun showItems(items: MutableList<ProductEntity>) {
-//        val context = activity as Context
-//
-//        itemAdapter = ItemAdapter(items, context)
-//        listItems.adapter = itemAdapter
-//    }
-
-//    override fun showFilterbyName(name: String) {
-//        Log.d(TAG, "Text: $name")
-//        itemAdapter.filter.filter(name)
-//    }
 
 }

@@ -1,7 +1,9 @@
 package com.ma.businessinventory.db.interactor
 
 import com.ma.businessinventory.db.entities.ProductEntity
+import com.ma.businessinventory.db.entities.SummaryEntity
 import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 
 interface IProductInteractor {
 
@@ -13,12 +15,14 @@ interface IProductInteractor {
 
     fun insertAll(products: MutableList<ProductEntity>)
 
-    fun insert(product: ProductEntity)
+    fun insert(product: ProductEntity): Disposable
 
-    fun delete(product: ProductEntity)
+    fun delete(product: ProductEntity): Disposable
 
     fun deleteAll()
 
-    fun update(product: ProductEntity)
+    fun update(product: ProductEntity): Disposable
+
+    fun allSummary(): Observable<MutableList<SummaryEntity>>
 
 }

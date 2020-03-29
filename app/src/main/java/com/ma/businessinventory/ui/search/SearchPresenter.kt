@@ -19,8 +19,6 @@ class SearchPresenter(private val iProductInteractor: IProductInteractor) : Sear
         loadProducts()
     }
 
-    //    private var model: Search.Model = SearchModel(this)
-
     override fun getItems(): LiveData<MutableList<ProductEntity>> {
         return allProducts
     }
@@ -36,26 +34,4 @@ class SearchPresenter(private val iProductInteractor: IProductInteractor) : Sear
             )
     }
 
-//    override fun getItems(activity: Activity) {
-//        model.getItems(activity)
-//    }
-
-//    override fun showItems(items: MutableList<ProductEntity>) {
-//        view.showItems(items)
-//    }
-
 }
-
-//class SearchPresenter(private var view: Search.View) : Search.Presenter {
-//
-//    private var model: Search.Model = SearchModel(this)
-//
-//    override fun getItems(activity: Activity) {
-//        model.getItems(activity)
-//    }
-//
-//    override fun showItems(items: MutableList<ProductEntity>) {
-//        view.showItems(items)
-//    }
-//
-//}
