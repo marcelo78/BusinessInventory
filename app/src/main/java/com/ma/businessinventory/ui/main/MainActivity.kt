@@ -1,10 +1,10 @@
 package com.ma.businessinventory.ui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
@@ -13,12 +13,17 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jakewharton.rxbinding2.widget.RxSearchView
 import com.ma.businessinventory.R
 import com.ma.businessinventory.adapter.MainPagerAdapter
 import com.ma.businessinventory.ui.adddetailitem.AddDetailItemActivity
 import com.ma.businessinventory.ui.detailitem.ItemDetailActivity
+import com.ma.businessinventory.ui.search.Search
 import com.ma.businessinventory.ui.search.SearchFragment
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.concurrent.TimeUnit
+
 
 class MainActivity : AppCompatActivity(), IMain.View,
     BottomNavigationView.OnNavigationItemSelectedListener {
@@ -29,6 +34,7 @@ class MainActivity : AppCompatActivity(), IMain.View,
         const val ItemId = "PRODUCT_ID"
     }
 
+    lateinit var disposable: Disposable
     lateinit var fm: FragmentManager
 
     private lateinit var mainPagerAdapter: MainPagerAdapter
@@ -89,28 +95,29 @@ class MainActivity : AppCompatActivity(), IMain.View,
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.mainmenu, menu)
-        val searchItem = menu.findItem(R.id.action_search_by_name)
-        val searchView = searchItem.actionView as SearchView
-        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextChange(newText: String): Boolean {
-//                Log.d(TAG, "Text: $newText")
-//                getSearchFragment(fm)?.let {
-//                    val view = it as Search.View
-//                    view.showFilterbyName(newText)
-//                }
-                return false
-            }
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return false
-            }
-
-        })
+        val searchMenuItem = menu.findItem(R.id.action_search_by_name)
+        setupSearchView(searchMenuItem)
 
         return true
+    }
+
+    @SuppressLint("CheckResult")
+    fun setupSearchView(searchMenuItem: MenuItem) {
+        val searchView = searchMenuItem.actionView as SearchView
+        searchView.queryHint = getString(R.string.search_hint) // your hint here
+
+        RxSearchView.queryTextChanges(searchView)
+            .retry(3)
+            .debounce(300, TimeUnit.MILLISECONDS)
+            .subscribe { newText ->
+                Log.d(TAG, "[Rx - SearchView] $newText")
+                getSearchFragment(fm)?.let {
+                    val view = it as Search.View
+                    view.showFilterbyName("$newText")
+                }
+            }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
@@ -181,6 +188,11 @@ class MainActivity : AppCompatActivity(), IMain.View,
             }
         }
         return null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.dispose()
     }
 
 }
