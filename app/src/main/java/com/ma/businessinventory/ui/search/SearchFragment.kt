@@ -17,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  *
  */
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), Search.View {
 
     companion object {
         private val TAG = SearchFragment::class.java.simpleName
@@ -52,4 +52,8 @@ class SearchFragment : Fragment() {
         })
     }
 
+    override fun showFilterbyName(name: String) {
+        Log.d(TAG, "Text: $name")
+        itemAdapter.filter.filter(name)
+    }
 }
