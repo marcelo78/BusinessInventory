@@ -1,26 +1,22 @@
 package com.ma.businessinventory.ui.detailitem
 
-import android.app.Activity
-import com.ma.businessinventory.db.entity.ProductEntity
+import android.util.Log
+import androidx.lifecycle.ViewModel
+import com.ma.businessinventory.db.entities.ProductEntity
+import com.ma.businessinventory.db.interactor.IProductInteractor
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 
-class ItemDetailPresenter(private var view: IItemDetail.View) : IItemDetail.Presenter {
+class ItemDetailPresenter(private val iProductInteractor: IProductInteractor) :
+    IItemDetail.Presenter, ViewModel() {
 
-    private var model: IItemDetail.Model = ItemDetailModel(this)
-
-    override fun getItem(idItem: Long, activity: Activity) {
-        model.getItem(idItem, activity)
+    override fun getItem(idItem: Long): Observable<ProductEntity> {
+        Log.d("ItemDetailPresenter", "Entro a a traer data")
+        return iProductInteractor.loadAllByIds(idItem)
     }
 
-    override fun showItem(product: List<ProductEntity>) {
-        view.populate(product)
-    }
-
-    override fun deleteItem(product: ProductEntity, activity: Activity) {
-        model.deleteItem(product, activity)
-    }
-
-    override fun showResult() {
-        view.showResult()
+    override fun deleteItem(product: ProductEntity): Disposable {
+        return iProductInteractor.delete(product)
     }
 
 }

@@ -1,18 +1,37 @@
 package com.ma.businessinventory.ui.search
 
-import android.app.Activity
-import com.ma.businessinventory.db.entity.ProductEntity
+import android.annotation.SuppressLint
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.ma.businessinventory.db.entities.ProductEntity
+import com.ma.businessinventory.db.interactor.IProductInteractor
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
-class SearchPresenter(private var view: Search.View) : Search.Presenter {
+class SearchPresenter(private val iProductInteractor: IProductInteractor) : Search.Presenter,
+    ViewModel() {
 
-    private var model: Search.Model = SearchModel(this)
+    private val allProducts: MutableLiveData<MutableList<ProductEntity>> = MutableLiveData()
 
-    override fun getItems(activity: Activity) {
-        model.getItems(activity)
+    init {
+        loadProducts()
     }
 
-    override fun showItems(items: MutableList<ProductEntity>) {
-        view.showItems(items)
+    override fun getItems(): LiveData<MutableList<ProductEntity>> {
+        return allProducts
+    }
+
+    @SuppressLint("CheckResult")
+    fun loadProducts() {
+        iProductInteractor.getAll()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { products -> allProducts.postValue(products) },
+                { Log.d("RxJava", "Error getting info from interactor into presenter") }
+            )
     }
 
 }

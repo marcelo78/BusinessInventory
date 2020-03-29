@@ -1,4 +1,4 @@
-package com.ma.businessinventory.db.entity
+package com.ma.businessinventory.db.entities
 
 import androidx.room.ColumnInfo
 

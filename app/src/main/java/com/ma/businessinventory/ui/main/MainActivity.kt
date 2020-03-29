@@ -11,16 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.ma.businessinventory.MyApplication
 import com.ma.businessinventory.R
 import com.ma.businessinventory.adapter.MainPagerAdapter
-import com.ma.businessinventory.db.ProductViewModel
 import com.ma.businessinventory.ui.adddetailitem.AddDetailItemActivity
 import com.ma.businessinventory.ui.detailitem.ItemDetailActivity
-import com.ma.businessinventory.ui.search.Search
 import com.ma.businessinventory.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -79,10 +75,6 @@ class MainActivity : AppCompatActivity(), IMain.View,
                 my_toolbar.menu.findItem(R.id.action_search_by_name).isVisible = (position == 0)
             }
         })
-
-        // Get a new or existing ViewModel from the ViewModelProvider.
-        (this.application as MyApplication).productViewModel =
-            ViewModelProvider(this).get(ProductViewModel::class.java)
     }
 
     override fun onResume() {
@@ -104,16 +96,15 @@ class MainActivity : AppCompatActivity(), IMain.View,
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
-                Log.d(TAG, "Text: $newText")
-                getSearchFragment(fm)?.let {
-                    val view = it as Search.View
-                    view.showFilterbyName(newText)
-                }
+//                Log.d(TAG, "Text: $newText")
+//                getSearchFragment(fm)?.let {
+//                    val view = it as Search.View
+//                    view.showFilterbyName(newText)
+//                }
                 return false
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                // task HERE
                 return false
             }
 

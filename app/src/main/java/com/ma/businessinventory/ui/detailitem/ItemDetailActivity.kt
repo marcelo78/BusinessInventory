@@ -8,18 +8,17 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ma.businessinventory.R
-import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.db.entities.ProductEntity
 import com.ma.businessinventory.ui.adddetailitem.AddDetailItemActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_item_detail.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- *
- */
 class ItemDetailActivity : AppCompatActivity(), ICommunicator, IItemDetail.View {
 
     private var idItem = 0L
-    private lateinit var presenter: IItemDetail.Presenter
+
+    private val itemDetailPresenter: ItemDetailPresenter by viewModel()
 
     companion object {
         private val TAG = ItemDetailActivity::class.java.simpleName
@@ -36,8 +35,6 @@ class ItemDetailActivity : AppCompatActivity(), ICommunicator, IItemDetail.View 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_detail)
         setSupportActionBar(detail_toolbar)
-
-        presenter = ItemDetailPresenter(this)
 
         fab.setOnClickListener {
 
@@ -87,17 +84,15 @@ class ItemDetailActivity : AppCompatActivity(), ICommunicator, IItemDetail.View 
     override fun loadCoverImage(idItem: Long, path: String) {
         Log.d(TAG, path)
         this.idItem = idItem
-        Picasso.get()
-            .load(path)
-            .placeholder(R.drawable.ic_photo_white_100dp)
-            .error(R.drawable.ic_photo_white_100dp)
-            .fit()
-            .centerCrop()
-            .into(ivCover)
-    }
-
-    override fun populate(product: List<ProductEntity>) {
-
+        if (path.isNotEmpty()) {
+            Picasso.get()
+                .load(path)
+                .placeholder(R.drawable.ic_photo_white_100dp)
+                .error(R.drawable.ic_photo_white_100dp)
+                .fit()
+                .centerCrop()
+                .into(ivCover)
+        }
     }
 
     override fun showResult() {
@@ -111,7 +106,8 @@ class ItemDetailActivity : AppCompatActivity(), ICommunicator, IItemDetail.View 
         builder.setMessage(getString(R.string.dialog_delete_item_message))
         builder.setPositiveButton(getString(R.string.dialog_delete_item_yes)) { _, _ ->
             val product = ProductEntity(idItem)
-            presenter.deleteItem(product, this)
+            itemDetailPresenter.deleteItem(product)
+            showResult()
         }
         builder.setNegativeButton(getText(R.string.dialog_delete_item_no)) { _, _ ->
             Log.d(TAG, "You are not agree.")

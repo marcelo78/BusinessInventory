@@ -9,15 +9,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ma.businessinventory.R
-import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.db.entities.ProductEntity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_item_detail.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- *
- */
 class ItemDetailFragment : Fragment(), IItemDetail.View {
 
-    private lateinit var presenter: IItemDetail.Presenter
+    private val itemDetailPresenter: ItemDetailPresenter by viewModel()
     private lateinit var comm: ICommunicator
 
     private lateinit var tvDate: TextView
@@ -31,14 +31,18 @@ class ItemDetailFragment : Fragment(), IItemDetail.View {
         super.onCreate(savedInstanceState)
 
         comm = activity as ICommunicator
-        presenter = ItemDetailPresenter(this)
 
         arguments?.let {
             if (it.containsKey(ITEM_ID)) {
                 Log.d("ItemDetailFragment", "id:${it.getLong(ITEM_ID, 0L)}")
                 idItem = it.getLong(ITEM_ID, 0L)
                 if (idItem != 0L) {
-                    presenter.getItem(idItem, activity!!)
+                    itemDetailPresenter.getItem(idItem)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            populate(it)
+                        }
                 }
             }
         }
@@ -65,27 +69,22 @@ class ItemDetailFragment : Fragment(), IItemDetail.View {
 
     }
 
-    override fun populate(product: List<ProductEntity>) {
-
-        if (product.isNotEmpty()) {
-            product.first().let {
-                activity?.toolbar_layout?.title = it.nameInventory
-                it.photo?.let { it1 -> comm.loadCoverImage(idItem, it1) }
-                tvDate.text = it.dateProduct
-                tvPrice.text = activity?.getString(
-                    R.string.list_item_text_cost_item,
-                    it.unidSellPriceUS.toString()
-                ) ?: it.unidSellPriceUS.toString()
-                tvDescription.text = it.description
-                tvPlace.text = it.place
-                tvType.text = it.type
-            }
-        }
-
+    fun populate(product: ProductEntity) {
+        activity?.toolbar_layout?.title = product.nameInventory
+        product.photo?.let { it1 -> comm.loadCoverImage(idItem, it1) }
+        tvDate.text = product.dateProduct
+        tvPrice.text = activity?.getString(
+            R.string.list_item_text_cost_item,
+            product.unidSellPriceUS.toString()
+        ) ?: product.unidSellPriceUS.toString()
+        tvDescription.text = product.description
+        tvPlace.text = product.place
+        tvType.text = product.type
     }
 
     override fun showResult() {
         Toast.makeText(activity, "Successful", Toast.LENGTH_SHORT).show()
         activity!!.finish()
     }
+
 }

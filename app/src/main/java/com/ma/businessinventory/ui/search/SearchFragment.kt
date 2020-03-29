@@ -1,36 +1,31 @@
 package com.ma.businessinventory.ui.search
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ma.businessinventory.R
 import com.ma.businessinventory.adapter.ItemAdapter
-import com.ma.businessinventory.db.entity.ProductEntity
 import com.ma.businessinventory.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_search.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  *
  */
-class SearchFragment : Fragment(), Search.View {
+class SearchFragment : Fragment() {
 
     companion object {
         private val TAG = SearchFragment::class.java.simpleName
     }
 
-    private lateinit var presenter: Search.Presenter
+    private val searchPresenter: SearchPresenter by viewModel()
+
     private lateinit var itemAdapter: ItemAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        presenter = SearchPresenter(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,22 +40,16 @@ class SearchFragment : Fragment(), Search.View {
         super.onActivityCreated(savedInstanceState)
 
         listItems.layoutManager = LinearLayoutManager(context)
-        presenter.getItems(activity!!)
+
         fabAddItem.setOnClickListener {
             (activity as MainActivity).openEditItemActivity(0)
         }
-    }
 
-    override fun showItems(items: MutableList<ProductEntity>) {
-        val context = activity as Context
-
-        itemAdapter = ItemAdapter(items, context)
-        listItems.adapter = itemAdapter
-    }
-
-    override fun showFilterbyName(name: String) {
-        Log.d(TAG, "Text: $name")
-        itemAdapter.filter.filter(name)
+        searchPresenter.getItems().observe(viewLifecycleOwner, Observer { products ->
+            Log.d("initializeUI", "size ${products.size}")
+            itemAdapter = activity?.let { ItemAdapter(products, it) }!!
+            listItems.adapter = itemAdapter
+        })
     }
 
 }

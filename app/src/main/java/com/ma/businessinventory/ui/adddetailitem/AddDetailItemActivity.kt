@@ -1,5 +1,6 @@
 package com.ma.businessinventory.ui.adddetailitem
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -10,16 +11,20 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ma.businessinventory.R
-import com.ma.businessinventory.db.entity.ProductEntity
+import com.ma.businessinventory.db.entities.ProductEntity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_detail_item.*
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddDetailItemActivity : AppCompatActivity(), IAddDetailItem.View {
 
     private var idItem: Long = 0
 
-    private lateinit var presenter: IAddDetailItem.Presenter
+    private val addDetailItemPresenter: AddDetailItemPresenter by viewModel()
+
     private lateinit var product: ProductEntity
+
     private lateinit var productOld: ProductEntity
 
     private var myOnFocusChangeListener = OnFocusChangeListener { view, hasFocus ->
@@ -27,7 +32,13 @@ class AddDetailItemActivity : AppCompatActivity(), IAddDetailItem.View {
             val editText = (view as EditText)
             Log.d(TAG, "$hasFocus id: $editText")
             fillData()
-            presenter.updateData(product, editText.text.toString(), editText.id)
+            populate(
+                addDetailItemPresenter.updateData(
+                    product,
+                    editText.text.toString(),
+                    editText.id
+                )
+            )
         }
     }
 
@@ -45,8 +56,6 @@ class AddDetailItemActivity : AppCompatActivity(), IAddDetailItem.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_detail_item)
         setSupportActionBar(findViewById(R.id.my_toolbar))
-
-        presenter = AddDetailItemPresenter(this)
 
         product = ProductEntity()
         checkMode()
@@ -71,15 +80,20 @@ class AddDetailItemActivity : AppCompatActivity(), IAddDetailItem.View {
                 photo = etPhoto.text.toString()
             }
 
-            val valid = presenter.validate(product)
-            if (valid) {
+            val valid = addDetailItemPresenter.validate(product)
+            if (valid["isValid"] == 1) {
                 if (idItem == 0L) {
-                    presenter.insertItem(product, this)
+                    addDetailItemPresenter.insertItem(product)
                 } else {
-                    presenter.updateItem(product, this)
+                    addDetailItemPresenter.updateItem(product)
                 }
+                showResult()
+            } else {
+                showErrorMessage(
+                    valid["view"] ?: error(""),
+                    getString(valid["message"] ?: error(""))
+                )
             }
-
         }
     }
 
@@ -99,10 +113,16 @@ class AddDetailItemActivity : AppCompatActivity(), IAddDetailItem.View {
         }
     }
 
+    @SuppressLint("CheckResult")
     override fun onStart() {
         super.onStart()
         if (idItem != 0L) {
-            presenter.getItem(idItem, this)
+            addDetailItemPresenter.getItem(idItem)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    populate(it)
+                }
             etName.onFocusChangeListener = myOnFocusChangeListener
             etPlace.onFocusChangeListener = myOnFocusChangeListener
             etDescription.onFocusChangeListener = myOnFocusChangeListener
@@ -120,7 +140,7 @@ class AddDetailItemActivity : AppCompatActivity(), IAddDetailItem.View {
     }
 
     override fun onBackPressed() {
-        if (presenter.validateChangedField(productOld, product)) {
+        if (addDetailItemPresenter.validateChangedField(productOld, product)) {
             showAlert()
         } else {
             finish()
@@ -161,29 +181,27 @@ class AddDetailItemActivity : AppCompatActivity(), IAddDetailItem.View {
         finish()
     }
 
-    override fun populate(product: List<ProductEntity>) {
-        if (product.isNotEmpty()) {
-            this.product = product[0]
-            if (!::productOld.isInitialized) {
-                productOld = product[0].copy()
-            }
-            product[0].apply {
-                Log.d(TAG, "Name: $nameInventory")
-                etName.setText(nameInventory)
-                etPlace.setText(place)
-                etDescription.setText(description)
-                etType.setText(type)
-                etDate.setText(dateProduct)
-                etBarcode.setText(barcode)
-                etBoughtNo.setText("$boughtNo")
-                etSoldNo.setText("$soldNo")
-                etUnidBuyPrice.setText("$unidBuyPriceUS")
-                etUnidSellPrice.setText("$unidSellPriceUS")
-                etTotalCost.setText("$totalCostUS")
-                etTotalReceived.setText("$totalReceivedUS")
-                etTotalProfit.setText("$totalProfitUS")
-                etPhoto.setText(photo)
-            }
+    override fun populate(product: ProductEntity) {
+        this.product = product
+        if (!::productOld.isInitialized) {
+            productOld = product.copy()
+        }
+        product.apply {
+            Log.d(TAG, "Name: $nameInventory")
+            etName.setText(nameInventory)
+            etPlace.setText(place)
+            etDescription.setText(description)
+            etType.setText(type)
+            etDate.setText(dateProduct)
+            etBarcode.setText(barcode)
+            etBoughtNo.setText("$boughtNo")
+            etSoldNo.setText("$soldNo")
+            etUnidBuyPrice.setText("$unidBuyPriceUS")
+            etUnidSellPrice.setText("$unidSellPriceUS")
+            etTotalCost.setText("$totalCostUS")
+            etTotalReceived.setText("$totalReceivedUS")
+            etTotalProfit.setText("$totalProfitUS")
+            etPhoto.setText(photo)
         }
     }
 
